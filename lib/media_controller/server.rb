@@ -9,24 +9,36 @@ class Server
   end
   
   def start_playing(file, options = "-fs")
-    @semaphore.synchronize do
+    lock do
       _stop
       @mplayer = IO.popen("#{MPLAYER} #{options} '#{file}'")
+      @currently_playing = file
     end
   end
   
   def stop
-    @semaphore.synchronize do
+    lock do
       _stop
     end
   end
   
+  def currently_playing
+    lock do
+      @currently_playing
+    end
+  end
+  
 private
+  def lock(&block)
+    @semaphore.synchronize(&block)
+  end
+  
   def _stop
     return unless @mplayer
     Process.kill("TERM", @mplayer.pid)
     Process.waitpid(@mplayer.pid)
     @mplayer = nil
+    @currently_playing = nil
   end
 end
 
