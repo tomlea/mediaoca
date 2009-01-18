@@ -1,0 +1,39 @@
+body {
+  background: #222;
+  font-family: "Arial", sans-serif;
+  color: #444;
+}
+
+div.box {
+  border: 5px solid #fff;
+  background: #ddd;
+  padding: 1em;
+  margin: 1em auto;
+  -moz-border-radius: 10px; -webkit-border-radius: 10px; 
+  width: 400px;
+}
+
+div#menu {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 10px 20px 0 0;
+}
+div#menu a {
+  text-decoration: none;
+  padding: 0 0.5em;
+  border-left: 3px solid #444;
+}
+
+div#menu a.first {
+  border-left: none;
+}
+
+h1#title {
+  color: #555;      
+}
+
+h1, h2, h3 {
+  margin: 0;
+  color: #000;
+}
