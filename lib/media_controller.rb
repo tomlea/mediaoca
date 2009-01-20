@@ -1,5 +1,5 @@
 module MediaController
 end
 
-require "media_controler/client"
-require "media_controler/server"
+require "media_controller/client"
+require "media_controller/server"

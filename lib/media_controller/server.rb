@@ -1,7 +1,7 @@
 require 'drb'
 module MediaController
   class Server
-    MPLAYER="/opt/local/bin/mplayer"
+    MPLAYER="/usr/bin/mplayer"
   
     def initialize()
       @semaphore = Mutex.new
@@ -43,7 +43,7 @@ module MediaController
   end
 end
 
-if File.expand_path($0) == __FILE__
-  DRb.start_service("drbunix:/tmp/mplayer.sock", Server.new())
+if File.expand_path($0) == File.expand_path(__FILE__)
+  DRb.start_service("drbunix:/tmp/mplayer.sock", MediaController::Server.new())
   DRb.thread.join
 end

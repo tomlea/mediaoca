@@ -1,0 +1,5 @@
+<ul>
+<% @episodes.each do |episode| %>
+  <li><%= link_to(episode, :action => "show", :episode => episode) %></li>
+<% end %>
+</ul>
