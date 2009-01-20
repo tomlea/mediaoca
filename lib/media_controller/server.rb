@@ -13,7 +13,7 @@ module MediaController
     def play(file, options = "-fs")
       lock do
         _stop
-        @mplayer = IO.popen("#{MPLAYER} -slave #{options} '#{file}'")
+        @mplayer = IO.popen("#{MPLAYER} -slave #{options} '#{file}' > /dev/null")
         @currently_playing = file
       end
     end
@@ -36,6 +36,7 @@ module MediaController
     end
   
     def _stop
+      p "Killing: #{@mplayer && @mplayer.pid}"
       return unless @mplayer
       Process.kill("TERM", @mplayer.pid)
       Process.waitpid(@mplayer.pid)

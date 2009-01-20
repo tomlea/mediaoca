@@ -4,6 +4,10 @@
   </p>
 <% end %>
 
+<h2>Currently Playing: <%= h @currently_playing || "nothing" %></h2>
+<strong style="font-size: 2em;">
+  <%= link_to "stop", :action => "stop" if @currently_playing %>
+</strong>
 <ul>
 <% @episodes.each do |episode| %>
   <li><%= link_to(File.basename(episode), :action => "show", :episode => episode) %></li>

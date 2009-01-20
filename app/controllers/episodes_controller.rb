@@ -4,12 +4,23 @@ class EpisodesController < ApplicationController
 
   def index
     @episodes = all_episodes
+    @currently_playing = media_controller.currently_playing
   end
   
   def show
     @episode = all_episodes.find{|e| e == params[:episode] }
-    MediaController::Client.new.play(@episode)
+    media_controller.play(@episode)
     redirect_to :action => "index"
+  end
+  
+  def stop
+    media_controller.stop
+    redirect_to :action => "index"
+  end
+  
+private
+  def media_controller
+    @media_controller ||= MediaController::Client.new
   end
   
   def all_episodes
