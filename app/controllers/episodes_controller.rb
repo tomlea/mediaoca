@@ -1,5 +1,7 @@
 class EpisodesController < ApplicationController
   ROOT="/home/norman/Desktop/NZB/TV"
+  # ROOT="/Users/norman/nzb"
+
   def index
     @episodes = all_episodes
   end
@@ -11,6 +13,6 @@ class EpisodesController < ApplicationController
   end
   
   def all_episodes
-    @episodes ||= Dir.glob("#{ROOT}/**/*.avi")
+    @episodes ||= Dir.glob("#{ROOT}/**/*.{avi,wmv}").sort
   end
 end

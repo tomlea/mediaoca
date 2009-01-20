@@ -1,5 +1,11 @@
+<% if flash[:notice] %>
+  <p style="color: #000; background: #fea;">
+    <%= flash[:notice] %>
+  </p>
+<% end %>
+
 <ul>
 <% @episodes.each do |episode| %>
-  <li><%= link_to(episode, :action => "show", :episode => episode) %></li>
+  <li><%= link_to(File.basename(episode), :action => "show", :episode => episode) %></li>
 <% end %>
 </ul>

@@ -7,7 +7,13 @@ module MediaController
     end
   
     def method_missing(method, *args)
-      @mplayer.send(method, *args)
-    end
+      MediaController::CONTROLLER.connect do
+        begin
+          @mplayer.send(method, *args)
+        rescue
+          raise Errno::ECONNREFUSED, "Connection refused"
+        end
+      end
+    end    
   end
 end
