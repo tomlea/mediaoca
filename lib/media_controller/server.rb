@@ -17,6 +17,8 @@ module MediaController
           exec("#{MPLAYER} -slave #{options} '#{file}'")
           exit
         end
+        
+        puts "Started #{@mplayer} playing #{file}"
         @currently_playing = file
       end
     end
