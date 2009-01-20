@@ -1,46 +1,49 @@
 require 'drb'
-
-class Server
-  MPLAYER="/opt/local/bin/mplayer"
+module MediaController
+  class Server
+    MPLAYER="/opt/local/bin/mplayer"
   
-  def initialize()
-    @semaphore = Mutex.new
-    @mplayer = nil
-  end
-  
-  def start_playing(file, options = "-fs")
-    lock do
-      _stop
-      @mplayer = IO.popen("#{MPLAYER} #{options} '#{file}'")
-      @currently_playing = file
+    def initialize()
+      @semaphore = Mutex.new
+      @mplayer = nil
     end
-  end
   
-  def stop
-    lock do
-      _stop
+    def play(file, options = "-fs")
+      lock do
+        _stop
+        @mplayer = IO.popen("#{MPLAYER} -slave #{options} '#{file}'")
+        @currently_playing = file
+      end
     end
-  end
   
-  def currently_playing
-    lock do
-      @currently_playing
+    def stop
+      lock do
+        _stop
+      end
     end
-  end
   
-private
-  def lock(&block)
-    @semaphore.synchronize(&block)
-  end
+    def currently_playing
+      lock do
+        @currently_playing
+      end
+    end
   
-  def _stop
-    return unless @mplayer
-    Process.kill("TERM", @mplayer.pid)
-    Process.waitpid(@mplayer.pid)
-    @mplayer = nil
-    @currently_playing = nil
+  private
+    def lock(&block)
+      @semaphore.synchronize(&block)
+    end
+  
+    def _stop
+      return unless @mplayer
+      Process.kill("TERM", @mplayer.pid)
+      Process.waitpid(@mplayer.pid)
+      @mplayer = nil
+      @currently_playing = nil
+    end
   end
 end
 
-DRb.start_service("drbunix:/tmp/mplayer.sock", Server.new())
-DRb.thread.join
+if File.expand_path($0) == __FILE__
+  DRb.start_service("drbunix:/tmp/mplayer.sock", Server.new())
+  DRb.thread.join
+end
