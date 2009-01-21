@@ -21,4 +21,12 @@ namespace :deploy do
     desc "#{t} task is a no-op with mod_rails"
     task t, :roles => :app do ; end
   end
+  
+  task :copy_site_config do
+    run "cp -R #{shared_path}/config/* #{current_path}/config/"
+  end
+end
+
+after "deploy:update_code" do
+  deploy.copy_site_config
 end

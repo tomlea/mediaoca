@@ -1,7 +1,4 @@
 class EpisodesController < ApplicationController
-  ROOT="/home/norman/Desktop/NZB/TV"
-  # ROOT="/Users/norman/nzb"
-
   def index
     @episodes = all_episodes
     currently_playing = media_controller.currently_playing
@@ -31,6 +28,11 @@ private
   end
   
   def all_episodes
-    @episodes ||= Dir.glob("#{ROOT}/**/*.{avi,wmv}").sort
+    p media_paths
+    @episodes ||= media_paths.inject([]){|acc, path| acc + Dir.glob("#{path}/**/*.{avi,wmv}")}.sort
+  end
+  
+  def media_paths
+    @media_paths ||= YAML.load(File.open(File.join(Rails.root, "config", "media_paths.yml")))
   end
 end

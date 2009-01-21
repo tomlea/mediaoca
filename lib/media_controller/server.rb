@@ -2,8 +2,7 @@ require 'drb'
 
 module MediaController
   class Server
-    MPLAYER="/usr/bin/mplayer"
-    # MPLAYER="/opt/local/bin/mplayer"
+    MPLAYER=`which mplayer`.chomp
   
     attr_reader :paused
   
