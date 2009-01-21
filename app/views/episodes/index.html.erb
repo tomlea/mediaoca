@@ -4,10 +4,11 @@
   </p>
 <% end %>
 
-<h2>Currently Playing: <%= h @currently_playing || "nothing" %></h2>
-<strong style="font-size: 2em;">
+<h2>Currently Playing:</h2>
+<pre><%= h @currently_playing || "nothing" %></pre>
+<strong style="font-size: 1.1em;">
   <% if @currently_playing %>
-    <%= link_to "stop", :action => "stop" %>
+    <%= link_to "stop", :action => "stop" %> |
     <%= link_to( (@paused ? "resume" : "pause"), :action => "pause") %>
   <% end %>
 </strong>
