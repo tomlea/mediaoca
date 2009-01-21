@@ -14,7 +14,7 @@
   <% @episodes.each do |episode| %>
     <li>
       <p class="last-watched">
-        <%=h Episode.find_or_create_by_filename(episode).last_watched.to_s(:long) %>
+        <%=h Episode.find_or_create_by_filename(episode).last_watched.to_s %>
       </p>
       <%= link_to_play(episode) %>
     </li>
