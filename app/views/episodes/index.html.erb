@@ -1,25 +1,28 @@
-<h1>Mediaoca - Available Media</h1>
-<p>
-  Please select some media to play. If it messes up you may need to restart the media_controller daemon.
-</p>
-
-<% if flash[:notice] %>
-  <p style="color: #000; background: #fea;">
-    <%= flash[:notice] %>
+<div class="box">
+  <h1>Mediaoca - Available Media</h1>
+  <p>
+    Please select some media to play. If it messes up you may need to restart the media_controller daemon.
   </p>
-<% end %>
 
-<% if @currently_playing %>
-  <h2>Currently Playing:</h2>
-  <pre><%= h @currently_playing || "nothing" %></pre>
-  <strong style="font-size: 1.1em;">
-      <%= link_to "stop", :action => "stop" %> |
-      <%= link_to( (@paused ? "resume" : "pause"), :action => "pause") %>
-  </strong>
-<% end %>
+  <% if flash[:notice] %>
+    <p style="color: #000; background: #fea;">
+      <%= flash[:notice] %>
+    </p>
+  <% end %>
 
-<ul>
-<% @episodes.each do |episode| %>
-  <li><%= link_to(File.basename(episode), :action => "show", :episode => episode) %></li>
-<% end %>
-</ul>
+  <ul>
+  <% @episodes.each do |episode| %>
+    <li><%= link_to_play(episode) %></li>
+  <% end %>
+  </ul>
+</div>
+
+<div id="currently_playing">
+  <% if @currently_playing %>
+    <span style="float: right">
+        <%= link_to "stop", :action => "stop" %> |
+        <%= link_to( (@paused ? "resume" : "pause"), :action => "pause") %>
+    </span>
+  <% end %>
+  Currently Playing: <code><%= h @currently_playing || "nothing" %></code>
+</div>

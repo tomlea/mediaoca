@@ -1,4 +1,5 @@
 class EpisodesController < ApplicationController
+  include EpisodesHelper
   def index
     @episodes = all_episodes
     currently_playing = media_controller.currently_playing
@@ -7,7 +8,7 @@ class EpisodesController < ApplicationController
   end
   
   def show
-    @episode = all_episodes.find{|e| e == params[:episode] }
+    @episode = all_episodes.find{|e| file_digest(e) == params[:episode] }
     media_controller.play(@episode)
     redirect_to :action => "index"
   end

@@ -2,16 +2,31 @@ body {
   background: #222;
   font-family: "Arial", sans-serif;
   color: #444;
+  padding: 0;
 }
 
-div.box {
+div.box, div#currently_playing {
+  position: absolute;
   border: 5px solid #fff;
   background: #ddd;
-  padding: 1em;
-  margin: 1em auto;
+  padding: 10px;
+  margin: 0;
   -moz-border-radius: 10px; -webkit-border-radius: 10px; 
   width: 600px;
+  top: 70px;
+  left: 50%;
+  margin-left: -310px;
 }
+
+div#currently_playing {
+  border-top: 0;
+  -moz-border-radius-topleft: 0; -webkit-border-top-left-radius: 0; 
+  -moz-border-radius-topright: 0; -webkit-border-top-right-radius: 0; 
+  top: 0;
+  height: 20px;
+  overflow: hidden;
+}
+
 
 div#menu {
   position: absolute;
