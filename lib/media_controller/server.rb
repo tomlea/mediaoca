@@ -10,11 +10,12 @@ module MediaController
       @mplayer = nil
     end
   
-    def play(file, options = "-fs")
+    def play(file, options = ["-fs"])
       lock do
         _stop
         @mplayer = fork do
-          exec("#{MPLAYER} -slave #{options} '#{file}'")
+          ops = [MPLAYER, "-slave"] + options + [file]
+          exec(*ops)
           exit
         end
         
