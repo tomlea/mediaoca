@@ -23,7 +23,7 @@ namespace :deploy do
   end
   
   task :copy_site_config do
-    run "cp -R #{shared_path}/config/* #{current_path}/config/"
+    run "cp -R #{shared_path}/config/* #{release_path}/config/"
   end
 end
 
