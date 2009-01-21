@@ -22,6 +22,7 @@ namespace :deploy do
     task t, :roles => :app do ; end
   end
   
+  desc "Copy config files from server side shared path."
   task :copy_site_config do
     run "cp -R #{shared_path}/config/* #{release_path}/config/"
   end
