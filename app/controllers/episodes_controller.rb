@@ -4,7 +4,9 @@ class EpisodesController < ApplicationController
 
   def index
     @episodes = all_episodes
-    @currently_playing = File.basename(media_controller.currently_playing)
+    currently_playing = media_controller.currently_playing
+    @currently_playing = currently_playing && File.basename(currently_playing)
+    @paused = media_controller.paused
   end
   
   def show
@@ -15,6 +17,11 @@ class EpisodesController < ApplicationController
   
   def stop
     media_controller.stop
+    redirect_to :action => "index"
+  end
+
+  def pause
+    media_controller.pause
     redirect_to :action => "index"
   end
   

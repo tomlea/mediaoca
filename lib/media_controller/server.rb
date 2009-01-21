@@ -5,22 +5,36 @@ module MediaController
     MPLAYER="/usr/bin/mplayer"
     # MPLAYER="/opt/local/bin/mplayer"
   
+    attr_reader :paused
+  
     def initialize()
       @semaphore = Mutex.new
       @mplayer = nil
+      @paused = false
     end
   
     def play(file, options = ["-fs"])
       lock do
         _stop
+        @paused = false
+        rd, wr = IO.pipe
         @mplayer = fork do
+          STDIN.reopen(rd)
           ops = [MPLAYER, "-slave"] + options + [file]
           exec(*ops)
-          exit
         end
+
+        @mplayer_pipe = wr
         
         puts "Started #{@mplayer} playing #{file}"
         @currently_playing = file
+      end
+    end
+  
+    def pause
+      lock do
+        @mplayer_pipe.puts "p" if @mplayer
+        @paused = !@paused
       end
     end
   
