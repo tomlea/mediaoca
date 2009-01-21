@@ -12,10 +12,10 @@ div.box, div#currently_playing {
   padding: 10px;
   margin: 0;
   -moz-border-radius: 10px; -webkit-border-radius: 10px; 
-  width: 600px;
+  width: 700px;
   top: 70px;
   left: 50%;
-  margin-left: -310px;
+  margin-left: -360px;
 }
 
 div#currently_playing {
