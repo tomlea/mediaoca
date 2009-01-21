@@ -4,7 +4,7 @@ class EpisodesController < ApplicationController
 
   def index
     @episodes = all_episodes
-    @currently_playing = media_controller.currently_playing
+    @currently_playing = File.basename(media_controller.currently_playing)
   end
   
   def show
