@@ -10,6 +10,7 @@ class EpisodesController < ApplicationController
   def show
     @episode = all_episodes.find{|e| file_digest(e) == params[:episode] }
     media_controller.play(@episode)
+    Episode.find_or_create_by_filename(@episode).update_attribute(:last_watched, Time.now)
     redirect_to :action => "index"
   end
   

@@ -27,6 +27,11 @@ div#currently_playing {
   overflow: hidden;
 }
 
+p.last-watched {
+  font-size: 0.7em;
+  color: #aaa;
+  float: right;
+}
 
 div#menu {
   position: absolute;
