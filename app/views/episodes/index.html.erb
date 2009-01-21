@@ -4,14 +4,15 @@
   </p>
 <% end %>
 
-<h2>Currently Playing:</h2>
-<pre><%= h @currently_playing || "nothing" %></pre>
-<strong style="font-size: 1.1em;">
-  <% if @currently_playing %>
-    <%= link_to "stop", :action => "stop" %> |
-    <%= link_to( (@paused ? "resume" : "pause"), :action => "pause") %>
-  <% end %>
-</strong>
+<% if @currently_playing %>
+  <h2>Currently Playing:</h2>
+  <pre><%= h @currently_playing || "nothing" %></pre>
+  <strong style="font-size: 1.1em;">
+      <%= link_to "stop", :action => "stop" %> |
+      <%= link_to( (@paused ? "resume" : "pause"), :action => "pause") %>
+  </strong>
+<% end %>
+
 <ul>
 <% @episodes.each do |episode| %>
   <li><%= link_to(File.basename(episode), :action => "show", :episode => episode) %></li>
