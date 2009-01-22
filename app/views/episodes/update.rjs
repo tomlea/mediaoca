@@ -1,3 +1,4 @@
 page.replace dom_id(episode), :partial => "episode", :object => episode
-page.replace "currently_playing", :partial => "currently_playing"
 page.visual_effect(:highlight, dom_id(episode), :duration => 0.3)
+page.replace "currently_playing", :partial => "currently_playing"
+page.visual_effect(:highlight, "currently_playing", :duration => 0.3)

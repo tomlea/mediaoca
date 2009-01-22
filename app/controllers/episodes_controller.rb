@@ -1,28 +1,15 @@
 class EpisodesController < ApplicationController
   include EpisodesHelper
-  
-  def check_currently_playing
-    @currently_playing_thread = thread do
-      currently_playing = media_controller.currently_playing
-      @currently_playing = currently_playing && File.basename(currently_playing)
-    end
-  end
-  
-  def currently_playing
-    Timeout.timeout(3){ @currently_playing_thread.join } rescue nil
-    @currently_playing
-  end
-  
+
   def index
-    currently_playing
     @episodes = all_episodes
-    @paused = media_controller.paused
   end
   
   def show
     media_controller.play(episode.filename)
     episode.seen!
-    redirect_to :action => "index"
+    fetch_currently_playing
+    update_episode
   end
   
   def seen
@@ -32,12 +19,14 @@ class EpisodesController < ApplicationController
   
   def stop
     media_controller.stop
-    redirect_to :action => "index"
+    fetch_currently_playing
+    update_currently_playing
   end
 
   def pause
     media_controller.pause
-    redirect_to :action => "index"
+    fetch_currently_playing
+    update_currently_playing
   end
   
 private
@@ -48,6 +37,20 @@ private
     end
   end
   
+  def update_currently_playing
+    respond_to do |format|
+      format.js   { render :action => :update_currently_playing, :layout => false }
+      format.html { redirect_to :action => "index" }
+    end
+  end
+  
+  def fetch_currently_playing
+    @currently_playing = media_controller.currently_playing
+    @currently_playing = File.basename(@currently_playing) if @currently_playing
+    @paused = media_controller.paused
+  end
+  before_filter :fetch_currently_playing, :except => [:show, :stop, :pause]
+    
   def episode
     @episode ||= Episode.for(all_episodes.find{|e| file_digest(e) == params[:episode] })
   end

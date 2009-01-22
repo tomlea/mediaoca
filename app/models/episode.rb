@@ -31,6 +31,10 @@ class Episode < ActiveRecord::Base
   def seen?
     last_watched?
   end
+  
+  def seen!
+    self.seen = true
+  end
 
   def seen=(bool)
     update_attribute(:last_watched, bool ? Time.now : nil)

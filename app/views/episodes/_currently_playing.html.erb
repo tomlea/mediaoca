@@ -1,9 +1,9 @@
-  <div id="currently_playing">
-    <% if @currently_playing %>
-      <span style="float: right">
-          <%= link_to "stop", :action => "stop" %> |
-          <%= link_to( (@paused ? "resume" : "pause"), :action => "pause") %>
-      </span>
-    <% end %>
-    Playing: <code><%= h @currently_playing || "nothing" %></code>
-  </div>
+<div id="currently_playing">
+  <% if @currently_playing %>
+    <span style="float: right">
+        <%= link_to_remote "stop", :url => {:action => "stop"} %> |
+        <%= link_to_remote( (@paused ? "resume" : "pause"), :url => {:action => "pause"}) %>
+    </span>
+  <% end %>
+  Playing: <code><%= h @currently_playing || "nothing" %></code>
+</div>
