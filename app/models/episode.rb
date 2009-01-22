@@ -20,7 +20,7 @@ class Episode < ActiveRecord::Base
   def name
     returning File.basename(filename) do |name|
       name[/\.[^.]+$/] = ""
-      name.gsub!(".","")
+      name.gsub!("."," ")
     end
   end
   
