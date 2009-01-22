@@ -12,25 +12,7 @@
 
   <ul>
   <% @episodes.each do |filename| episode = Episode.for(filename) %>
-    <li class="episode <%= episode.seen? ?  "seen" :  "notseen"%>">
-      <div class="filename">
-        <%= h episode.name %>
-      </div>
-      <div class="options">
-        <%= link_to_play("play", episode) %>        
-        <%= link_to_seen(episode.seen? ? "not seen" : "seen", episode) %>        
-      </div>
-    </li>
+      <%= render(:partial => "episode", :object => episode) %>
   <% end %>
   </ul>
-</div>
-
-<div id="currently_playing">
-  <% if @currently_playing %>
-    <span style="float: right">
-        <%= link_to "stop", :action => "stop" %> |
-        <%= link_to( (@paused ? "resume" : "pause"), :action => "pause") %>
-    </span>
-  <% end %>
-  Playing: <code><%= h @currently_playing || "nothing" %></code>
 </div>

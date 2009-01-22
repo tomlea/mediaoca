@@ -1,12 +1,16 @@
 <html>
 <head>
   <link rel="stylesheet" href="/stylesheets/master.css" type="text/css" media="screen" title="Main Style" charset="utf-8"/>
+  <%= javascript_include_tag :all %>
+  <title>Mediaoca</title>
 </head>
 <body>
   <h1 id="title">Mediaoca</h1>
   <div id="menu">
     <!-- <a href="#" class="first">Login</a><a href="#">Profile</a> -->
   </div>
+  
+  <%= render :partial => 'currently_playing' %>
 
   <%= yield %>
 </body>

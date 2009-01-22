@@ -1,0 +1,9 @@
+<% content_tag_for(:li, episode, :class => (episode.seen? ?  "seen" :  "notseen")) do %>
+  <div class="filename">
+    <%= h episode.name %>
+  </div>
+  <div class="options">
+    <%= link_to_play("play", episode) %>        
+    <%= link_to_seen(episode.seen? ? "not seen" : "seen", episode) %>        
+  </div>
+<% end %>
