@@ -11,7 +11,7 @@
   <% end %>
 
   <ul>
-  <% @episodes.each do |filename| episode = Episode.for(filename) %>
+  <% @episodes.each do |episode| %>
       <%= render(:partial => "episode", :object => episode) %>
   <% end %>
   </ul>

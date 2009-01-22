@@ -52,7 +52,9 @@ private
   before_filter :fetch_currently_playing, :except => [:show, :stop, :pause]
     
   def episode
-    @episode ||= Episode.for(all_episodes.find{|e| file_digest(e) == params[:episode] })
+    @episode ||= all_episodes.find{|e|
+        e.hash_code == params[:episode]
+      }
   end
   helper_method :episode
 
@@ -62,7 +64,13 @@ private
   
   def all_episodes
     p media_paths
-    @episodes ||= media_paths.inject([]){|acc, path| acc + Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv}")}.sort
+    @episodes ||= media_paths.inject([]){|acc, path|
+      acc + Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv}")
+    }.map{|filename|
+      Episode.for(filename)
+    }.sort_by{|episode|
+      [episode.seen ? 1 : 0, episode.filename]
+    }
   end
   
   def media_paths
