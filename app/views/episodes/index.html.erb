@@ -11,12 +11,15 @@
   <% end %>
 
   <ul>
-  <% @episodes.each do |episode| %>
-    <li>
-      <%= link_to_play(episode) %>
-      <p class="last-watched">
-        <%=h Episode.find_or_create_by_filename(episode).last_watched.to_s %>
-      </p>
+  <% @episodes.each do |filename| episode = Episode.for(filename) %>
+    <li class="episode <%= episode.seen? ?  "seen" :  "notseen"%>">
+      <div class="filename">
+        <%= h episode.name %>
+      </div>
+      <div class="options">
+        <%= link_to_play("play", episode) %>        
+        <%= link_to_seen(episode.seen? ? "not seen" : "seen", episode) %>        
+      </div>
     </li>
   <% end %>
   </ul>

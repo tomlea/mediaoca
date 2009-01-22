@@ -8,9 +8,13 @@ class EpisodesController < ApplicationController
   end
   
   def show
-    @episode = all_episodes.find{|e| file_digest(e) == params[:episode] }
-    media_controller.play(@episode)
-    Episode.find_or_create_by_filename(@episode).update_attribute(:last_watched, Time.now)
+    media_controller.play(episode.filename)
+    episode.seen!
+    redirect_to :action => "index"
+  end
+  
+  def seen
+    episode.seen = ! episode.seen
     redirect_to :action => "index"
   end
   
@@ -25,6 +29,10 @@ class EpisodesController < ApplicationController
   end
   
 private
+  def episode
+    @episode ||= Episode.for(all_episodes.find{|e| file_digest(e) == params[:episode] })
+  end
+
   def media_controller
     @media_controller ||= MediaController::Client.new
   end

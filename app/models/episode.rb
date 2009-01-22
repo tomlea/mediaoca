@@ -8,6 +8,33 @@ class Episode < ActiveRecord::Base
   end
   
   def self.for(name)
-    find_or_create_by_filename(name)
+    returning find_or_create_by_filename(name) do |e|
+      e.filename = name
+    end
   end
+  
+  def to_param
+    hash_code
+  end
+  
+  def name
+    returning File.basename(filename) do |name|
+      name[/\.[^.]+$/] = ""
+      name.gsub!(".","")
+    end
+  end
+  
+  def seen
+    last_watched?
+  end
+  
+  def seen?
+    last_watched?
+  end
+
+  def seen=(bool)
+    update_attribute(:last_watched, bool ? Time.now : nil)
+  end
+  
+  attr_accessor :filename
 end
