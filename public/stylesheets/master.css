@@ -64,8 +64,11 @@ ul {
 }
 
 li.episode {
+  -moz-border-radius: 5px; -webkit-border-radius: 5px;
+  border: 1px solid #aaa;
   margin: 5px 0;
-  padding: 5px;  
+  padding: 5px 30px 5px 10px;
+  position: relative;
 }
 
 li.episode.seen {
@@ -76,5 +79,11 @@ li.episode.seen {
 li.episode.notseen {
   color: #000;
   background: #fff;
+}
+
+li.episode div.options {
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 
