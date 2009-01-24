@@ -13,6 +13,10 @@ class Episode < ActiveRecord::Base
     end
   end
   
+  def self.clenseables
+    YAML.load(File.open(File.join(Rails.root, "config", "clenseables.yml")))
+  end
+  
   def to_param
     hash_code
   end
@@ -21,6 +25,10 @@ class Episode < ActiveRecord::Base
     returning File.basename(filename) do |name|
       name[/\.[^.]+$/] = ""
       name.gsub!("."," ")
+      self.class.clenseables.each do |clenseable|
+        name.gsub!(clenseable, "")
+        name.gsub!(" +"," ")
+      end
     end
   end
   
