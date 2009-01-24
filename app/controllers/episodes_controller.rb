@@ -63,7 +63,6 @@ private
   end
   
   def all_episodes
-    p media_paths
     @episodes ||= media_paths.inject([]){|acc, path|
       acc + Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv}")
     }.map{|filename|
