@@ -22,12 +22,12 @@ namespace :deploy do
     task t, :roles => :app do ; end
   end
   
-  desc "Copy config files from server side shared path."
-  task :copy_site_config do
-    run "cp -R #{shared_path}/config/* #{release_path}/config/"
+  desc "Link config files from server side shared path."
+  task :link_site_config do
+    run "for F in #{shared_path}/config/*; do ln -s $F #{release_path}/config/; done"
   end
 end
 
 after "deploy:update_code" do
-  deploy.copy_site_config
+  deploy.link_site_config
 end
