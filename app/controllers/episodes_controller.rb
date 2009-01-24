@@ -5,7 +5,7 @@ class EpisodesController < ApplicationController
     @episodes = all_episodes
   end
   
-  def show
+  def play
     media_controller.play(episode.filename)
     episode.seen!
     fetch_currently_playing
@@ -49,7 +49,7 @@ private
     @currently_playing = File.basename(@currently_playing) if @currently_playing
     @paused = media_controller.paused
   end
-  before_filter :fetch_currently_playing, :except => [:show, :stop, :pause]
+  before_filter :fetch_currently_playing, :except => [:play, :stop, :pause]
     
   def episode
     @episode ||= all_episodes.find{|e|
