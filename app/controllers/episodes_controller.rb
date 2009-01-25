@@ -64,7 +64,7 @@ private
   
   def all_episodes
     @episodes ||= media_paths.inject([]){|acc, path|
-      acc + Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv}")
+      acc + Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv,ts}")
     }.map{|filename|
       Episode.for(filename)
     }.sort_by{|episode|
