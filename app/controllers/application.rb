@@ -18,6 +18,8 @@ private
     @currently_playing = media_controller.currently_playing
     @currently_playing = File.basename(@currently_playing) if @currently_playing
     @paused = media_controller.paused
+    @currently_playing_updated = true
+  rescue DRb::DRbConnError
   end
   before_filter :fetch_currently_playing, :except => [:play, :stop, :pause]
 

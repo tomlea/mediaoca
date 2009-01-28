@@ -1,6 +1,15 @@
 <%= render :partial => 'currently_downloading' %>
 
+<div class="box">
+  <h2>Enqueue NZB</h2>
+  <% form_for(@enqueue, :url => {:action => :enqueue}) do |f| %>
+    <label>NewzbinId: <%= f.text_field :newzbin_id %></label>
+    <%= f.submit %>
+  <% end %>
+</div>
+
 <%= periodically_call_remote(:url => {}, :frequency => 5) %>
+
 
 <!-- <div class="box">
   <h1>Details</h1>

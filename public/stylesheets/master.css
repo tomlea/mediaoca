@@ -15,6 +15,17 @@ div.box {
   width: 700px;
 }
 
+strong {
+  color: #222;
+  font-weight: normal;
+  font-size: 1.1em;
+}
+
+div.notice {
+  border-color: #c63;
+  background: #fea;
+}
+
 div#top_bar {
   position:relative;
   height: 50px;
@@ -47,6 +58,7 @@ div#menu {
 div#menu a {
   text-decoration: none;
   padding: 0 0.5em;
+  color: #aaf;
 }
 
 h1#title {

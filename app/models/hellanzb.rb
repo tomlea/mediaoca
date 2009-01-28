@@ -1,5 +1,5 @@
 class Hellanzb
-  HELLA_URL = "http://hellanzb:changeme@mediaoca:8760"
+  HELLA_URL = "http://hellanzb:changeme@localhost:8760"
   HELLA_BIN = `which hellanzb`.chomp
   
   require 'xmlrpc/client'
