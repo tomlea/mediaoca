@@ -29,7 +29,9 @@ class EpisodesController < ApplicationController
     update_currently_playing
   end
   
+  
   def update_currently_playing
+    fetch_currently_playing unless @currently_playing
     respond_to do |format|
       format.js   { render :action => :update_currently_playing, :layout => false }
       format.html { redirect_to :action => "index" }
