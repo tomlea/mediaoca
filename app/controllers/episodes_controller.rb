@@ -29,7 +29,6 @@ class EpisodesController < ApplicationController
     update_currently_playing
   end
   
-  
   def update_currently_playing
     fetch_currently_playing unless @currently_playing
     respond_to do |format|
@@ -46,23 +45,12 @@ private
     end
   end
     
-  def fetch_currently_playing
-    @currently_playing = media_controller.currently_playing
-    @currently_playing = File.basename(@currently_playing) if @currently_playing
-    @paused = media_controller.paused
-  end
-  before_filter :fetch_currently_playing, :except => [:play, :stop, :pause]
-    
   def episode
     @episode ||= all_episodes.find{|e|
         e.hash_code == params[:episode]
       }
   end
   helper_method :episode
-
-  def media_controller
-    @media_controller ||= MediaController::Client.new
-  end
   
   def all_episodes
     @episodes ||= media_paths.inject([]){|acc, path|
