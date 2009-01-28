@@ -3,28 +3,34 @@ body {
   font-family: "Arial", sans-serif;
   color: #444;
   padding: 0;
+  margin: 0;
 }
 
-div.box, div#currently_playing {
-  position: absolute;
+div.box {
   border: 5px solid #fff;
   background: #ddd;
   padding: 10px;
-  margin: 0;
+  margin: 2em auto;
   -moz-border-radius: 10px; -webkit-border-radius: 10px; 
   width: 700px;
-  top: 70px;
-  left: 50%;
-  margin-left: -365px;
+}
+
+div#top_bar {
+  position:relative;
+  height: 50px;
+  background: #000;
+  margin: 0;
 }
 
 div#currently_playing {
-  border-top: 0;
-  -moz-border-radius-topleft: 0; -webkit-border-top-left-radius: 0; 
-  -moz-border-radius-topright: 0; -webkit-border-top-right-radius: 0; 
-  top: 0;
-  height: 20px;
-  overflow: hidden;
+  bottom: 10px;
+  left: 200px;
+  padding: 15px 200px;
+  color: #222;
+}
+
+div#currently_playing.playing {
+  color: #fff;
 }
 
 p.last-watched {
@@ -34,22 +40,23 @@ p.last-watched {
 
 div#menu {
   position: absolute;
-  top: 0px;
+  top: 15px;
   right: 0px;
-  padding: 10px 20px 0 0;
+  padding: 0;
 }
 div#menu a {
   text-decoration: none;
   padding: 0 0.5em;
-  border-left: 3px solid #444;
-}
-
-div#menu a.first {
-  border-left: none;
 }
 
 h1#title {
-  color: #555;      
+  color: #555;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  line-height: 1em;
+  left: 5px;
+  bottom: 10px;
 }
 
 h1, h2, h3 {

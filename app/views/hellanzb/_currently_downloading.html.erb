@@ -1,0 +1,10 @@
+<% if @current_download_name %>
+<div class="box" id="currently_downloading">
+  <h2>Currently Downloading</h2>
+  <h3><%= h @current_download_name %></h3>
+  <p><strong><%= h @percent_complete %></strong>% of <strong><%= h @current_download_size %>mb</strong></p>
+
+  <p>Rate: <strong><%=h @rate %></strong>kbps</p>
+  <p>ETA: <strong><%= h @current_download_eta %></strong></p>
+<% end %>
+</div>

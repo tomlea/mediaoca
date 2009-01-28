@@ -29,14 +29,6 @@ class EpisodesController < ApplicationController
     update_currently_playing
   end
   
-private
-  def update_episode
-    respond_to do |format|
-      format.js   { render :action => :update, :layout => false }
-      format.html { redirect_to :action => "index" }
-    end
-  end
-  
   def update_currently_playing
     respond_to do |format|
       format.js   { render :action => :update_currently_playing, :layout => false }
@@ -44,6 +36,14 @@ private
     end
   end
   
+private
+  def update_episode
+    respond_to do |format|
+      format.js   { render :action => :update, :layout => false }
+      format.html { redirect_to :action => "index" }
+    end
+  end
+    
   def fetch_currently_playing
     @currently_playing = media_controller.currently_playing
     @currently_playing = File.basename(@currently_playing) if @currently_playing
@@ -64,7 +64,7 @@ private
   
   def all_episodes
     @episodes ||= media_paths.inject([]){|acc, path|
-      acc + Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv,ts}")
+      acc + Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv,ts,mov,mp4}")
     }.map{|filename|
       Episode.for(filename)
     }.sort_by{|episode|

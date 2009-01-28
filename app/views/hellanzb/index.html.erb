@@ -1,0 +1,10 @@
+<%= render :partial => 'currently_downloading' %>
+
+<%= periodically_call_remote(:url => {}, :frequency => 5) %>
+
+<!-- <div class="box">
+  <h1>Details</h1>
+  <% @status.except("log_entries", "", "time", "rate").each do |k,v| %>
+  <h2><%= h k.inspect %></h2><pre><%= h v.inspect %></pre>
+  <% end %>
+</div> -->

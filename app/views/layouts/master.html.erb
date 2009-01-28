@@ -5,12 +5,15 @@
   <title>Mediaoca</title>
 </head>
 <body>
-  <h1 id="title">Mediaoca</h1>
-  <div id="menu">
-    <!-- <a href="#" class="first">Login</a><a href="#">Profile</a> -->
-  </div>
-  
-  <%= render :partial => 'currently_playing' %>
+  <div id="top_bar">
+    <h1 id="title">Mediaoca</h1>
+    <div id="menu">
+      <%= link_to "Playlist", {:controller => :episodes}, :class => "first" %>
+      <%= link_to "NZB", {:controller => :hellanzb} %>
+    </div>
+    <%= render :partial => 'episodes/currently_playing' %>
+    <%= periodically_call_remote(:url => {:controller => :episodes, :action => :update_currently_playing}, :frequency => 60) %>
+  </div>  
 
   <%= yield %>
 </body>
