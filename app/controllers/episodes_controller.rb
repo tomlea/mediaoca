@@ -1,11 +1,7 @@
 class EpisodesController < ApplicationController
   include EpisodesHelper
-
+  
   def index
-    unless @currently_playing_updated
-      flash[:notice] = "Could not connect to the media_controller daemon. "+
-                       "Start it with <code>media_controller start</code>."
-    end
     @episodes = all_episodes
   end
   
@@ -22,7 +18,9 @@ class EpisodesController < ApplicationController
   end
   
   def stop
+    fetch_currently_playing
     media_controller.stop
+    @stopped_episode = @currently_playing_episode
     fetch_currently_playing
     update_currently_playing
   end
@@ -34,7 +32,7 @@ class EpisodesController < ApplicationController
   end
   
   def update_currently_playing
-    fetch_currently_playing unless @currently_playing_updated
+    fetch_currently_playing unless @currently_playing_episode
     respond_to do |format|
       format.js   { render :action => :update_currently_playing, :layout => false }
       format.html { redirect_to :action => "index" }

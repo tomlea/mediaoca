@@ -3,7 +3,16 @@
     <%= h episode.name %>
   </div>
   <div class="options">
-    <%= link_to_play("play", episode) %>        
-    <%= link_to_seen(episode.seen? ? "not seen" : "seen", episode) %>        
+    <% if @currently_playing_episode == episode %>
+      <% if @paused %>
+        <%= link_to_remote("play", :url => {:controller => :episodes, :action => "pause"}, :html => {:class => "play"}) %>
+      <% else %>
+        <%= link_to_remote("pause", :url => {:controller => :episodes, :action => "pause"}, :html => {:class => "pause"}) %>
+      <% end %>
+      <%= link_to_remote "stop", :url => {:controller => :episodes, :action => "stop"}, :html => {:class => "stop"} %>
+    <% else %>
+      <%= link_to_play("play", episode, :class => "play") %>
+    <% end %>
+    <%= link_to_seen(episode.seen? ? "not seen" : "seen", episode, :class => "seen") %>        
   </div>
 <% end %>

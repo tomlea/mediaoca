@@ -33,12 +33,6 @@ div#top_bar {
   margin: 0;
 }
 
-div#top_bar a {
-  text-decoration: none;
-  padding: 0 0 0 0.5em;
-  color: #aaf;
-}
-
 div#currently_playing {
   bottom: 10px;
   left: 200px;
@@ -60,6 +54,12 @@ div#menu {
   top: 15px;
   right: 5px;
   padding: 0;
+}
+
+div#menu a {
+  text-decoration: none;
+  padding: 0 0 0 0.5em;
+  color: #aaf;
 }
 
 h1#title {
@@ -107,3 +107,20 @@ li.episode div.options {
   top: 5px;
 }
 
+a.play, a.stop, a.pause, a.seen{
+  display: block;
+  width: 16px;
+  height: 0;
+  padding-top: 16px;
+  overflow: hidden;
+  float: left;
+}
+
+a.pause{ background: url("/images/control_pause.png"); }
+a.pause:hover{ background: url("/images/control_pause_blue.png"); }
+a.seen{ background: url("/images/control_eject.png"); }
+a.seen:hover{ background: url("/images/control_eject_blue.png"); }
+a.play{ background: url("/images/control_play.png"); }
+a.play:hover{ background: url("/images/control_play_blue.png"); }
+a.stop{ background: url("/images/control_stop.png"); }
+a.stop:hover{ background: url("/images/control_stop_blue.png"); }

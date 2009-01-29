@@ -13,13 +13,18 @@ private
   def select_layout
     "master"
   end
-
+  
   def fetch_currently_playing
-    @currently_playing = media_controller.currently_playing
-    @currently_playing = File.basename(@currently_playing) if @currently_playing
-    @paused = media_controller.paused
-    @currently_playing_updated = true
+    if currently_playing_file = media_controller.currently_playing
+      @currently_playing_episode = Episode.for(currently_playing_file)
+      @paused = media_controller.paused
+    else
+      @currently_playing_episode = nil
+      @paused = false
+    end
   rescue DRb::DRbConnError
+    @notice =        "Could not connect to the media_controller daemon. "+
+                     "Start it with <code>media_controller start</code>."
   end
   before_filter :fetch_currently_playing, :except => [:play, :stop, :pause]
 

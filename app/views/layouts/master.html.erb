@@ -14,11 +14,13 @@
     <%= render :partial => 'episodes/currently_playing' %>
     <%= periodically_call_remote(:url => {:controller => :episodes, :action => :update_currently_playing}, :frequency => 60) %>
   </div>
-  <% if flash[:notice] %>
+
+  <% if @notice || flash[:notice] %>
     <div class="box notice">
-      <%= flash[:notice] %>
+      <%= @notice || flash[:notice] %>
     </div>
   <% end %>
+
   <%= yield %>
 </body>
 </html>
