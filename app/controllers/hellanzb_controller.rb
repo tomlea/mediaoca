@@ -1,4 +1,6 @@
 class HellanzbController < ApplicationController
+  before_filter :hellanzb, :except => :start_server
+  
   def index
     @status = hellanzb.status
     if current_download = @status["currently_downloading"].first
@@ -29,6 +31,17 @@ class HellanzbController < ApplicationController
   
   def hellanzb
     @hellanzb ||= Hellanzb.new
+  rescue Errno::ECONNREFUSED
+    render :action => "server_down"
+  end
+  
+  def start_server
+    if Hellanzb.start_server
+      flash[:notice] = "Kindly asked the server to start."
+    else
+      flash[:notice] = "Server does not seem to have come up."      
+    end
+    redirect_to :back
   end
   
 private
