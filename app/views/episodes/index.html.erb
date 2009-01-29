@@ -1,9 +1,5 @@
 <div class="box">
   <h1>Mediaoca - Available Media</h1>
-  <p>
-    Please select some media to play. If it messes up you may need to restart the media_controller daemon.
-  </p>
-
   <ul>
   <% @episodes.each do |episode| %>
       <%= render(:partial => "episode", :object => episode) %>
