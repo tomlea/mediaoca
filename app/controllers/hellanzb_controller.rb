@@ -8,7 +8,7 @@ class HellanzbController < ApplicationController
       @percent_complete = @status["percent_complete"]
       @rate = @status["rate"]
     end
-    @paused = @status["is_paused"]
+    @current_download_paused = @status["is_paused"]
     
     @enqueue = Enqueue.new()
     
