@@ -55,9 +55,9 @@ div#menu {
   right: 0px;
   padding: 0;
 }
-div#menu a {
+div#top_bar a {
   text-decoration: none;
-  padding: 0 0.5em;
+  padding: 0 0 0 0.5em;
   color: #aaf;
 }
 
