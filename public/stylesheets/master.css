@@ -33,6 +33,12 @@ div#top_bar {
   margin: 0;
 }
 
+div#top_bar a {
+  text-decoration: none;
+  padding: 0 0 0 0.5em;
+  color: #aaf;
+}
+
 div#currently_playing {
   bottom: 10px;
   left: 200px;
@@ -52,13 +58,8 @@ p.last-watched {
 div#menu {
   position: absolute;
   top: 15px;
-  right: 0px;
+  right: 5px;
   padding: 0;
-}
-div#top_bar a {
-  text-decoration: none;
-  padding: 0 0 0 0.5em;
-  color: #aaf;
 }
 
 h1#title {
