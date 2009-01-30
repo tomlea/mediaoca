@@ -1,5 +1,5 @@
 class Episode < ActiveRecord::Base
-  EPISODE_MATCHERS = [/([0-9]{1,2})x([0-9]{1,2})/, /s([0-9]{1,2})e([0-9]{1,2})/]
+  EPISODE_MATCHERS = [/([0-9]{1,2})x([0-9]{1,2})/i, /s([0-9]{1,2})e([0-9]{1,2})/i]
   belongs_to :show
   
   def self.file_digest(file)
@@ -49,7 +49,7 @@ class Episode < ActiveRecord::Base
   end
   
   def series_and_episode
-    if EPISODE_MATCHERS.any?{|re| filename.downcase =~ re }
+    if EPISODE_MATCHERS.any?{|re| filename =~ re }
       [$1.to_i, $2.to_i]
     else
       nil
