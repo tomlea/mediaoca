@@ -3,7 +3,7 @@
     <% if episode.show %>
       <span class="show_name"><%= h(episode.show.name) %>
       <% if episode.series_and_episode %>
-        <%= "%02ix%02x" % [episode.series, episode.episode] %>
+        <%= "%02ix%02i" % [episode.series, episode.episode] %>
       <% end %>
       </span>
     <% end %>
