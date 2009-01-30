@@ -108,7 +108,7 @@ li.episode div.options {
 }
 
 div#detail_lightbox_backdrop {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
