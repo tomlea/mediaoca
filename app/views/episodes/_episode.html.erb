@@ -1,5 +1,8 @@
 <% content_tag_for(:li, episode, :class => (episode.seen? ?  "seen" :  "notseen")) do %>
   <div class="filename">
+    <% if episode.show %>
+      <span class="show_name"><%= h(episode.show.name) %></span>
+    <% end %>
     <%= h episode.name %>
   </div>
   <div class="options">

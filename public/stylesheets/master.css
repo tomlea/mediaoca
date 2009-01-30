@@ -102,6 +102,11 @@ li.episode.notseen {
   background: #fff;
 }
 
+li.episode span.show_name {
+  padding: 0 10px 0 0;
+  font-weight: bold;
+}
+
 div.options {
   position: absolute;
   right: 5px;

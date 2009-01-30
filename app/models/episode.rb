@@ -1,4 +1,6 @@
 class Episode < ActiveRecord::Base
+  belongs_to :show
+  
   def self.file_digest(file)
     Digest::MD5.hexdigest(file)
   end
@@ -10,6 +12,7 @@ class Episode < ActiveRecord::Base
   def self.for(name)
     returning find_or_create_by_filename(name) do |e|
       e.filename = name
+      e.show ||= Show.guess_show(e)
     end
   end
   
