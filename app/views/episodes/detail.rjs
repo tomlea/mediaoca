@@ -1,0 +1,3 @@
+page.replace "detail_lightbox", :partial => "detail"
+
+page << "showDetailLightbox();"

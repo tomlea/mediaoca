@@ -39,6 +39,12 @@ class EpisodesController < ApplicationController
     end
   end
   
+  def detail
+    respond_to do |format|
+      format.js
+    end
+  end
+  
 private
   def update_episode
     respond_to do |format|

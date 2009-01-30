@@ -107,7 +107,38 @@ li.episode div.options {
   top: 5px;
 }
 
-a.play, a.stop, a.pause, a.seen{
+div#detail_lightbox_backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+}
+
+div#detail_lightbox {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  margin-left: -320px;
+  width: 600px;
+  border: 5px solid #a60;
+  padding: 1em;
+  background: #fea;
+  -moz-border-radius: 10px; -webkit-border-radius: 10px; 
+}
+
+div#detail_lightbox h2 {
+  font-size: 1.1em;
+  line-height: 1em;
+}
+
+div#detail_lightbox p {
+  padding: 0;
+  margin: 5px 0 10px 5em;
+}
+
+a.play, a.stop, a.pause, a.seen, a.detail{
   display: block;
   width: 16px;
   height: 0;
@@ -116,6 +147,7 @@ a.play, a.stop, a.pause, a.seen{
   float: left;
 }
 
+a.detail{ background: url("/images/magnifier.png"); }
 a.pause{ background: url("/images/control_pause.png"); }
 a.pause:hover{ background: url("/images/control_pause_blue.png"); }
 a.seen{ background: url("/images/control_eject.png"); }

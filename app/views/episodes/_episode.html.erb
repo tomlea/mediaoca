@@ -14,5 +14,6 @@
       <%= link_to_play("play", episode, :class => "play") %>
     <% end %>
     <%= link_to_seen(episode.seen? ? "not seen" : "seen", episode, :class => "seen") %>        
+    <%= link_to_remote "more detail", :url => {:controller => :episodes, :action => "detail", :episode => episode}, :html => {:class => "detail"} %>
   </div>
 <% end %>
