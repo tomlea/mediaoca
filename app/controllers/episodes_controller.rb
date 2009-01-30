@@ -66,7 +66,13 @@ private
     }.map{|filename|
       Episode.for(filename)
     }.sort_by{|episode|
-      [episode.seen ? 1 : 0, episode.name.downcase]
+      [
+        episode.seen ? 1 : 0,
+        episode.show && episode.show.name || "",
+        episode.series || 0,
+        episode.episode  || 0,
+        episode.name.downcase
+      ]
     }
   end
   
