@@ -8,12 +8,23 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '02007f33c5329276593e99411e45c8b5'
 
+  before_filter :fetch_currently_playing, :except => [:play, :stop, :pause]
+  before_filter :authenticate
 private
+
+  def authenticate
+    authenticate_or_request_with_http_basic("Mediaoca") do |username, password|
+      password_hash = Digest::SHA1.hexdigest(password)
+      passwds = YAML.load(File.open(File.join(Rails.root, "config", "authentication.yml")))
+      passwds[username] and passwds[username] == password_hash
+    end
+  end
+
   layout :select_layout
   def select_layout
     "master"
   end
-  
+
   def fetch_currently_playing
     if currently_playing_file = media_controller.currently_playing
       @currently_playing_episode = Episode.for(currently_playing_file)
@@ -26,7 +37,6 @@ private
     @notice =        "Could not connect to the media_controller daemon. "+
                      "Start it with <code>media_controller start</code>."
   end
-  before_filter :fetch_currently_playing, :except => [:play, :stop, :pause]
 
   def media_controller
     @media_controller ||= MediaController::Client.new
