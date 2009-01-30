@@ -23,7 +23,6 @@
     <ul id="hellanzb_queue">
       <% queue.each do |item| %>
         <li>
-          <%= debug(item) %>
           <strong><%= h item["nzbName"] %></strong>
           (<strong><%= h item["total_mb"] %></strong>mb)
           
