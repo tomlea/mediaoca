@@ -35,8 +35,8 @@ class Hellanzb
   def self.start_server
     Timeout.timeout(1) do
       system(HELLA_BIN+" -D")
+      $?.success?
     end
-    $?.success?
   rescue Timeout::Error
     false
   end
