@@ -1,3 +1,4 @@
+require 'timeout'
 class Hellanzb
   HELLA_URL = "http://hellanzb:changeme@localhost:8760"
   HELLA_BIN = `which hellanzb`.chomp
@@ -32,7 +33,11 @@ class Hellanzb
   end
   
   def self.start_server
-    system(HELLA_BIN+" -D")
+    Timeout.timeout(1) do
+      system(HELLA_BIN+" -D")
+    end
     $?.success?
+  rescue Timeout::Error
+    false
   end
 end
