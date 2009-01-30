@@ -1,4 +1,5 @@
 class Episode < ActiveRecord::Base
+  EPISODE_MATCHERS = [/([0-9]{1,2})x([0-9]{1,2})/, /s([0-9]{1,2})e([0-9]{1,2})/]
   belongs_to :show
   
   def self.file_digest(file)
@@ -30,6 +31,10 @@ class Episode < ActiveRecord::Base
       name.gsub!("."," ")
       self.class.clenseables.each do |clenseable|
         name.gsub!(clenseable, "")
+        name.gsub!(/#{show.name}/, "") if show
+        EPISODE_MATCHERS.each do |em|
+          name.gsub!(em, "") if series_and_episode
+        end
         name.gsub!(" +"," ")
       end
     end
@@ -44,7 +49,7 @@ class Episode < ActiveRecord::Base
   end
   
   def series_and_episode
-    if filename.downcase =~ /([0-9]{1,2})x([0-9]{1,2})/ or filename.downcase =~ /s([0-9]{1,2})e([0-9]{1,2})/
+    if EPISODE_MATCHERS.any?{|re| filename.downcase =~ re }
       [$1.to_i, $2.to_i]
     else
       nil
