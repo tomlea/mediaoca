@@ -1,17 +1,9 @@
 class HellanzbController < ApplicationController
   before_filter :hellanzb, :except => :start_server
-  
+
   def index
-    @status = hellanzb.status
-    if current_download = @status["currently_downloading"].first
-      @current_download_name = current_download["nzbName"]
-      @current_download_size = current_download["total_mb"]
-      @current_download_eta  = simple_time(@status["eta"])
-      @percent_complete = @status["percent_complete"]
-      @rate = @status["rate"]
-    end
-    @current_download_paused = @status["is_paused"]
-    
+    load_status
+
     @enqueue = Enqueue.new()
     
     respond_to do |want|
@@ -44,7 +36,35 @@ class HellanzbController < ApplicationController
     redirect_to :back
   end
   
+  def pause_server
+    load_status
+    if @current_download_paused
+      hellanzb.continue
+    else
+      hellanzb.pause
+    end
+    
+    respond_to do |want|
+      want.html { redirect_to :action => :index }
+      want.js {
+        index
+      }
+    end
+  end
+  
 private
+  def load_status
+    @status = hellanzb.status
+    if current_download = @status["currently_downloading"].first
+      @current_download_name = current_download["nzbName"]
+      @current_download_size = current_download["total_mb"]
+    end
+    @current_download_eta  = simple_time(@status["eta"])
+    @percent_complete = @status["percent_complete"]
+    @rate = @status["rate"]
+    @current_download_paused = @status["is_paused"]
+  end
+
   def simple_time(seconds)
     mins, seconds = seconds.divmod(60)
     hours, mins = mins.divmod(60)

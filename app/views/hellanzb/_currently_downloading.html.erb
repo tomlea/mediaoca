@@ -8,13 +8,16 @@
     
     <p>ETA: <strong><%= h @current_download_eta %></strong></p>
     
-    <% if @current_download_paused %>
-      <p><strong>Paused</strong></p>
-    <% end %>
-    
   <% else %>
     <h3>Idle</h3>
   <% end %>
+
+  <% if @current_download_paused %>
+    <p><strong>Paused</strong></p>
+  <% end %>
+
+  <p><%= link_to_remote("toggle pause", :action => :pause_server) %></p>
+  
   <% if queue = @status["queued"] %>
     <h2>Queued</h2>
     <ul>
