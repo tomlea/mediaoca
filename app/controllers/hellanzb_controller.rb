@@ -33,7 +33,7 @@ class HellanzbController < ApplicationController
     else
       flash[:notice] = "Server does not seem to have come up."      
     end
-    redirect_to :back
+    redirect_to :action => :index
   end
   
   def force_download
