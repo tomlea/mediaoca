@@ -4,16 +4,8 @@
   <h2>Enqueue NZB</h2>
   <% form_for(@enqueue, :url => {:action => :enqueue}) do |f| %>
     <label>NewzbinId: <%= f.text_field :newzbin_id %></label>
-    <%= f.submit %>
+    <%= f.submit "Enqueue" %>
   <% end %>
 </div>
 
 <%= periodically_call_remote(:url => {}, :frequency => 5) %>
-
-
-<!-- <div class="box">
-  <h1>Details</h1>
-  <% @status.except("log_entries", "", "time", "rate").each do |k,v| %>
-  <h2><%= h k.inspect %></h2><pre><%= h v.inspect %></pre>
-  <% end %>
-</div> -->
