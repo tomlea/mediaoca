@@ -31,9 +31,9 @@ class Episode < ActiveRecord::Base
       name.gsub!("."," ")
       self.class.clenseables.each do |clenseable|
         name.gsub!(clenseable, "")
-        name.gsub!(/#{show.name}/, "") if show
+        name.sub!(/#{show.name}/, "") if show
         EPISODE_MATCHERS.each do |em|
-          name.gsub!(em, "") if series_and_episode
+          name.sub!(em, "") if series_and_episode
         end
         name.gsub!(" +"," ")
       end
