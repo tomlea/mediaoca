@@ -35,6 +35,22 @@ class Episode < ActiveRecord::Base
     end
   end
   
+  def series
+    series_and_episode && series_and_episode.first
+  end
+  
+  def episode
+    series_and_episode && series_and_episode.last
+  end
+  
+  def series_and_episode
+    if filename.downcase =~ /([0-9]{1,2})x([0-9]{1,2})/ or filename.downcase =~ /s([0-9]{1,2})e([0-9]{1,2})/
+      [$1.to_i, $2.to_i]
+    else
+      nil
+    end
+  end
+  
   def seen
     last_watched?
   end

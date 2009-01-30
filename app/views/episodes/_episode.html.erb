@@ -1,7 +1,11 @@
 <% content_tag_for(:li, episode, :class => (episode.seen? ?  "seen" :  "notseen")) do %>
   <div class="filename">
     <% if episode.show %>
-      <span class="show_name"><%= h(episode.show.name) %></span>
+      <span class="show_name"><%= h(episode.show.name) %>
+      <% if episode.series_and_episode %>
+        <%= episode.series %>x<%= episode.episode %>
+      <% end %>
+      </span>
     <% end %>
     <%= h episode.name %>
   </div>
