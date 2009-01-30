@@ -1,4 +1,8 @@
 <div class="box" id="currently_downloading">
+  <div class="options">
+    <%= link_to_remote("pause/resume", :url => {:action => :pause_server}, :html => {:class => "pause"}) %>
+  </div>
+  
   <h2>Currently Downloading</h2>
   <% if @current_download_name %>
     <h3><%= h @current_download_name %></h3>
@@ -12,19 +16,21 @@
     <h3>Idle</h3>
   <% end %>
 
-  <% if @current_download_paused %>
-    <p><strong>Paused</strong></p>
-  <% end %>
+  <p>Paused: <strong><%= h @current_download_paused %></strong></p>
 
-  <p><%= link_to_remote("toggle pause", :action => :pause_server) %></p>
-  
   <% if queue = @status["queued"] %>
     <h2>Queued</h2>
-    <ul>
+    <ul id="hellanzb_queue">
       <% queue.each do |item| %>
         <li>
+          <%= debug(item) %>
           <strong><%= h item["nzbName"] %></strong>
           (<strong><%= h item["total_mb"] %></strong>mb)
+          
+          <div class="options">
+            <%= link_to_remote("force download", :url => {:action => :force_download, :nzbid => item["id"]}, :html => {:class => "force"}) %>
+          </div>
+          
         </li>
       <% end %>
     </ul>

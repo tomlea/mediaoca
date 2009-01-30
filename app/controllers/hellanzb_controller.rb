@@ -36,6 +36,16 @@ class HellanzbController < ApplicationController
     redirect_to :back
   end
   
+  def force_download
+    hellanzb.force(params[:nzbid])
+    respond_to do |want|
+      want.html { redirect_to :action => :index }
+      want.js {
+        index
+      }
+    end
+  end
+  
   def pause_server
     load_status
     if @current_download_paused
