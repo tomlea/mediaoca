@@ -155,6 +155,11 @@ ul#hellanzb_queue li div.options {
   top: 2px;
 }
 
+div#system_commands ul {
+  list-style: disc inside;
+  margin: 10px;
+}
+
 a.play, a.stop, a.pause, a.seen, a.detail, a.force{
   display: block;
   width: 16px;
