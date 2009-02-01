@@ -1,14 +1,14 @@
-default_run_options[:pty] = true  
-  
-set :application, "mediaoca"  
-set :repository,  "git@mediaoca:mediaoca.git"  
-  
-set :deploy_to, "/apps/#{application}"  
-  
-set :scm, :git  
-  
-role :app, "mediaoca"  
-role :web, "mediaoca"  
+default_run_options[:pty] = true
+
+set :application, "mediaoca"
+set :deploy_to, "/apps/#{application}"
+
+set :scm, :git
+set :deploy_via, :remote_cache
+set :repository,  "git@mediaoca:mediaoca.git" 
+
+role :app, "mediaoca"
+role :web, "mediaoca"
 role :db,  "mediaoca", :primary => true
  
 namespace :deploy do
