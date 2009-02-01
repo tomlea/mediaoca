@@ -4,7 +4,7 @@ class SystemController < ApplicationController
       sleep 2
       Timeout.timeout(5){
         logger.info "Issuing sleep command."
-        v = system("sudo" "pmi" "action" "sleep")
+        v = system("/usr/bin/sudo" "pmi" "action" "sleep")
         logger.info "Sleep command returned #{v} (#{$?})."
       }
       exit
@@ -14,9 +14,9 @@ class SystemController < ApplicationController
   end
   
   def restart_media_controller
-    system("media_controller", "restart")
+    v = system("/usr/bin/media_controller", "restart")
     logger.info "Issued media_controller restart."
-    if $?.success?
+    if $?.success? and v
       flash[:notice] = "Media controller restart issued"
     else
       flash[:notice] = "Media controller restart issued, but seemed to fail."
