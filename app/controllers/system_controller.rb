@@ -1,6 +1,8 @@
+require "timeout"
 class SystemController < ApplicationController
   def sleep_system
     fork do
+      logger.info "Fork for sleep started, hanging for 2."
       sleep 2
       Timeout.timeout(5){
         logger.info "Issuing sleep command."
