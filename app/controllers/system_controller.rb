@@ -14,8 +14,10 @@ class SystemController < ApplicationController
   end
   
   def restart_media_controller
-    v = system("/usr/bin/media_controller", "restart")
-    logger.info "Issued media_controller restart."
+    Dir.chdir(ENV["HOME"]) do
+      v = system("/usr/bin/media_controller", "restart")
+      logger.info "Issued media_controller restart, while working from #{Dir.pwd}"
+    end
     if $?.success? and v
       flash[:notice] = "Media controller restart issued"
     else
