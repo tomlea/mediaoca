@@ -2,14 +2,10 @@ require "timeout"
 class SystemController < ApplicationController
   def sleep_system
     fork do
-      logger.info "Fork for sleep started, hanging for 2."
       sleep 2
-      Timeout.timeout(5){
-        logger.info "Issuing sleep command."
-        v = system("/usr/bin/sudo" "pmi" "action" "sleep")
-        logger.info "Sleep command returned #{v} (#{$?})."
-      }
-      exit
+      puts "Issuing sleep command."
+      system("/usr/bin/sudo /usr/sbin/pmi action sleep")
+      exit $?
     end
     flash[:notice] = "Sent system to sleep in 2."
     redirect_to :action => "index"
