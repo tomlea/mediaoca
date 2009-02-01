@@ -8,9 +8,9 @@
   <div id="top_bar">
     <h1 id="title">Mediaoca</h1>
     <div id="menu">
-      <%= link_to "Playlist", {:controller => :episodes}, :class => "first" %>
-      <%= link_to "NZB", {:controller => :hellanzb} %>
+      <%= link_to "episodes", {:controller => :episodes}, :class => "first" %>
       <%= link_to "shows", {:controller => :shows} %>
+      <%= link_to "nzb", {:controller => :hellanzb} %>
     </div>
     <%= render :partial => 'episodes/currently_playing' %>
     <%= periodically_call_remote(:url => {:controller => :episodes, :action => :update_currently_playing}, :frequency => 60) %>
