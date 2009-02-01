@@ -37,7 +37,7 @@ div#top_bar {
 div#currently_playing {
   bottom: 10px;
   left: 200px;
-  padding: 15px 200px;
+  padding: 15px 300px 15px 200px;
   color: #222;
 }
 
