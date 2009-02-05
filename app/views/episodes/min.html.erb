@@ -1,0 +1,17 @@
+<% if @currently_playing_episode %>
+  <h1><%= h File.basename(@currently_playing_episode.filename) %></h1>
+  <ul>
+    <li>
+      <% if @paused %>
+        <%= link_to_remote "play", :url => {:controller => :episodes, :action => "pause"} %>
+      <% else %>
+        <%= link_to_remote "pause", :url => {:controller => :episodes, :action => "pause"} %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to_remote "stop", :url => {:controller => :episodes, :action => "stop"} %>
+    </li>
+  </ul>
+<% else %>
+  <h1>Idle</h1>
+<% end %>

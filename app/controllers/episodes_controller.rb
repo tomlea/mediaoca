@@ -5,6 +5,11 @@ class EpisodesController < ApplicationController
     @episodes = all_episodes
   end
   
+  def min
+    fetch_currently_playing
+    render :layout => false
+  end
+
   def play
     media_controller.play(episode.filename)
     episode.seen!
