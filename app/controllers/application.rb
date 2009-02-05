@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
 private
 
   def authenticate
+    return true if request.remote_ip =~ /^192\.168\./
     authenticate_or_request_with_http_basic("Mediaoca") do |username, password|
       password_hash = Digest::SHA1.hexdigest(password)
       passwds = YAML.load(File.open(File.join(Rails.root, "config", "authentication.yml")))
