@@ -82,6 +82,6 @@ private
   end
   
   def media_paths
-    @media_paths ||= YAML.load(File.open(File.join(Rails.root, "config", "media_paths.yml")))
+    Episode.media_paths
   end
 end

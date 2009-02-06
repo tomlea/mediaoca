@@ -21,6 +21,10 @@ class Episode < ActiveRecord::Base
     YAML.load(File.open(File.join(Rails.root, "config", "clenseables.yml")))
   end
   
+  def self.media_paths
+    @media_paths ||= YAML.load(File.open(File.join(Rails.root, "config", "media_paths.yml")))
+  end
+
   def to_param
     hash_code
   end
@@ -71,6 +75,6 @@ class Episode < ActiveRecord::Base
   def seen=(bool)
     update_attribute(:last_watched, bool ? Time.now : nil)
   end
-  
+
   attr_accessor :filename
 end
