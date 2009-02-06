@@ -16,6 +16,19 @@ div.box {
   position: relative;
 }
 
+table td, table th, table{
+  padding: 2px 30px 2px 0;
+  text-align: left;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+  border-width: 1px 0;
+}
+
+table {
+  margin: 50px 0;
+  width: 100%;
+}
+
 strong {
   color: #222;
   font-weight: normal;

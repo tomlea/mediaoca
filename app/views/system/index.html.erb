@@ -5,3 +5,19 @@
     <li><%= link_to "Restart Media Controller", :action => "restart_media_controller" %></li>
   </ul>
 </div>
+
+<div class="box" id="disk_usage">
+  <h1>Disk Usage</h1>
+  <table>
+    <tr>
+      <th>Drive</th>
+      <th>Free (GB)</th>
+    </tr>
+    <% @disk_usage.each do |disk_usage| %>
+      <tr>
+        <td><strong><%= h disk_usage.path %></strong></td>
+        <td><strong><%= disk_usage.available / 1024 %></strong> / <strong><%= disk_usage.total / 1024 %></strong></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

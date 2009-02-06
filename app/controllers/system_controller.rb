@@ -1,4 +1,5 @@
 require "timeout"
+require "ostruct"
 class SystemController < ApplicationController
   def sleep_system
     fork do
@@ -22,5 +23,13 @@ class SystemController < ApplicationController
       flash[:notice] = "Media controller restart issued, but seemed to fail."
     end
     redirect_to :action => "index"
+  end
+
+  def index
+    @disk_usage = Episode.media_paths.map{|mp|
+      `/bin/df -m #{mp}`.chomp.split("\n").last.split(/ +/)
+    }.uniq{|parts| parts.first }.map{|(path, total, used, available)|
+      OpenStruct.new(:path => path, :total => total.to_i, :used => used.to_i, :available => available.to_i)
+    }
   end
 end
