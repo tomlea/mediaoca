@@ -27,7 +27,7 @@ class Episode < ActiveRecord::Base
     end
 
     def all
-      if @episodes and @episodes_updated > Time.now - 5.minuits
+      if @episodes and @episodes_updated > Time.now - 5.minutes
         @episodes
       else
         @episodes_updated = Time.now
