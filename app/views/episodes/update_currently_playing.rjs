@@ -1,2 +1,4 @@
 page.replace "currently_playing", :partial => "currently_playing"
-page.replace dom_id(@currently_playing_episode || @stopped_episode), :partial => "episode", :object => (@currently_playing_episode || @stopped_episode)
+if episiode = @currently_playing_episode || @stopped_episode
+  page.replace dom_id(episiode), :partial => "episode", :object => episiode
+end
