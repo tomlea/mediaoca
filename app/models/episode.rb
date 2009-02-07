@@ -25,6 +25,19 @@ class Episode < ActiveRecord::Base
     @media_paths ||= YAML.load(File.open(File.join(Rails.root, "config", "media_paths.yml")))
   end
 
+  def self.all
+    if @episodes and @episodes_updated > Time.now - 5.minuits
+      @episodes
+    else
+      @episodes_updated = Time.now
+      @episodes = media_paths.inject([]){|acc, path|
+        acc + Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv,ts,mov,mp4}")
+      }.map{|filename|
+        Episode.for(filename)
+      }
+    end
+  end
+
   def to_param
     hash_code
   end

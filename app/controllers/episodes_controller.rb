@@ -66,11 +66,7 @@ private
   helper_method :episode
   
   def all_episodes
-    @episodes ||= media_paths.inject([]){|acc, path|
-      acc + Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv,ts,mov,mp4}")
-    }.map{|filename|
-      Episode.for(filename)
-    }.sort_by{|episode|
+    @episodes ||= Episode.all.sort_by{|episode|
       [
         episode.seen ? 1 : 0,
         episode.show && episode.show.name || "",
