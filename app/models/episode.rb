@@ -17,9 +17,9 @@ class Episode < ActiveRecord::Base
       end
     end
 
-    def for(name)
-      returning find_or_create_by_filename(name) do |e|
-        e.filename = name
+    def for(filename)
+      returning find_or_create_by_filename(filename) do |e|
+        e.filename = filename
         e.show ||= Show.guess_show(e)
         e.save!
       end
