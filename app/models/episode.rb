@@ -111,6 +111,4 @@ class Episode < ActiveRecord::Base
   def seen=(bool)
     update_attribute(:last_watched, bool ? Time.now : nil)
   end
-
-  attr_accessor :filename
 end
