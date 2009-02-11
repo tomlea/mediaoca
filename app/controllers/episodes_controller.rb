@@ -1,10 +1,10 @@
 class EpisodesController < ApplicationController
   include EpisodesHelper
-  
+
   def index
     @episodes = all_episodes
   end
-  
+
   def min
     fetch_currently_playing
     render :layout => false
@@ -16,12 +16,12 @@ class EpisodesController < ApplicationController
     fetch_currently_playing
     update_episode
   end
-  
+
   def seen
     episode.seen = ! episode.seen
     update_episode
   end
-  
+
   def stop
     fetch_currently_playing
     media_controller.stop
@@ -35,7 +35,7 @@ class EpisodesController < ApplicationController
     fetch_currently_playing
     update_currently_playing
   end
-  
+
   def update_currently_playing
     fetch_currently_playing unless @currently_playing_episode
     respond_to do |format|
@@ -43,13 +43,13 @@ class EpisodesController < ApplicationController
       format.html { redirect_to :action => "index" }
     end
   end
-  
+
   def detail
     respond_to do |format|
       format.js
     end
   end
-  
+
 private
   def update_episode
     respond_to do |format|
@@ -57,14 +57,14 @@ private
       format.html { redirect_to :action => "index" }
     end
   end
-    
+
   def episode
     @episode ||= all_episodes.find{|e|
         e.hash_code == params[:episode]
       }
   end
   helper_method :episode
-  
+
   def all_episodes
     @episodes ||= Episode.all.sort_by{|episode|
       [
@@ -76,7 +76,7 @@ private
       ]
     }
   end
-  
+
   def media_paths
     Episode.media_paths
   end
