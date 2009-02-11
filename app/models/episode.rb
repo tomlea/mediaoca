@@ -33,19 +33,6 @@ class Episode < ActiveRecord::Base
       @media_paths ||= YAML.load(File.open(File.join(Rails.root, "config", "media_paths.yml")))
     end
 
-    def all
-      if @episodes and @episodes_updated > Time.now - 5.minutes
-        @episodes
-      else
-        @episodes_updated = Time.now
-        @episodes = media_paths.inject([]){|acc, path|
-          acc + Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv,ts,mov,mp4}")
-        }.map{|filename|
-          Episode.for(filename)
-        }
-      end
-    end
-
     def scan_for_episodes!
       media_paths.each{|path|
         Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv,ts,mov,mp4}")
@@ -55,7 +42,7 @@ class Episode < ActiveRecord::Base
     end
 
     def clean_up_deleted_episodes!
-      each do |episode|
+      all.each do |episode|
         episode.destroy! if episode.filename.nil? or not File.exist?(episode.filename)
       end
     end
