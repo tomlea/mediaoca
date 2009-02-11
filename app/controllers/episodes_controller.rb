@@ -64,7 +64,7 @@ private
   helper_method :episode
 
   def all_episodes
-    @episodes ||= Episode.all(:including => :show).sort_by{|episode|
+    @episodes ||= Episode.all(:include => :show).sort_by{|episode|
       [
         episode.seen ? 1 : 0,
         episode.show && episode.show.name || "",
