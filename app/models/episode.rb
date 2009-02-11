@@ -9,7 +9,7 @@ class Episode < ActiveRecord::Base
 
     def find_or_create_by_filename(filename)
       hash = file_digest(File.basename(filename))
-      if ep = find_or_by_hash_code(file_digest(filename))
+      if ep = find_by_hash_code(file_digest(filename))
         ep.update_attribute(:hash_code, hash)
         ep
       else
