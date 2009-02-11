@@ -59,7 +59,7 @@ private
   end
 
   def episode
-    @episode = Episode.find_by_hash_code(params[:episode]){
+    @episode = Episode.find_by_hash_code(params[:episode])
   end
   helper_method :episode
 
