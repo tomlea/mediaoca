@@ -21,6 +21,7 @@ class Episode < ActiveRecord::Base
       returning find_or_create_by_filename(name) do |e|
         e.filename = name
         e.show ||= Show.guess_show(e)
+        e.save!
       end
     end
 
