@@ -59,14 +59,12 @@ private
   end
 
   def episode
-    @episode ||= all_episodes.find{|e|
-        e.hash_code == params[:episode]
-      }
+    @episode = Episode.find_by_hash_code(params[:episode]){
   end
   helper_method :episode
 
   def all_episodes
-    @episodes ||= Episode.all.sort_by{|episode|
+    @episodes ||= Episode.all(:including => :show).sort_by{|episode|
       [
         episode.seen ? 1 : 0,
         episode.show && episode.show.name || "",
