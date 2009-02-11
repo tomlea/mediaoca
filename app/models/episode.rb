@@ -43,7 +43,7 @@ class Episode < ActiveRecord::Base
 
     def clean_up_deleted_episodes!
       all.each do |episode|
-        episode.destroy! if episode.filename.nil? or not File.exist?(episode.filename)
+        episode.destroy if episode.filename.nil? or not File.exist?(episode.filename)
       end
     end
   end
