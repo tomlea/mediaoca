@@ -41,6 +41,10 @@ class Episode < ActiveRecord::Base
       }
     end
 
+    def detect_missing_shows!
+      find_all_by_show_id(nil).each{|e| e.show = Show.guess_show(e); e.save! }
+    end
+
     def clean_up_deleted_episodes!
       all.each do |episode|
         episode.destroy if episode.filename.nil? or not File.exist?(episode.filename)
