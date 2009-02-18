@@ -1,0 +1,22 @@
+%html
+  %head
+    %link{ :href => "/stylesheets/master.css", :title => "Main Style", :rel => "stylesheet", :media => "screen", :type => "text/css", :charset => "utf-8" }
+    = javascript_include_tag :all
+    %title Mediaoca
+  %body
+    #top_bar
+      %h1#title
+        Mediaoca
+      #menu
+        = link_to "episodes", {:controller => :episodes}, :class => "first"
+        = link_to "shows", {:controller => :shows}
+        = link_to "nzb", {:controller => :hellanzb}
+        = link_to "system", {:controller => :system}
+      = render :partial => 'episodes/currently_playing'
+      = periodically_call_remote(:url => {:controller => :episodes, :action => :update_currently_playing}, :frequency => 60)
+    - if @notice || flash[:notice]
+      .box.notice
+        = @notice || flash[:notice]
+    = yield
+    #detail_lightbox_backdrop{ :style => "display: none" }
+      #detail_lightbox

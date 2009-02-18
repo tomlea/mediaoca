@@ -1,0 +1,15 @@
+#detail_lightbox
+  %h2 Filename:
+  %p= episode.filename
+  %h2  Last Played:
+  %p= episode.last_watched || "Never"
+  %h2 First Noticed:
+  %p= episode.created_at
+  %h2 Hashcode:
+  %p= episode.hash_code
+  %h2 Id:
+  %p= episode.id
+  %h2 Show:
+  %p= h episode.show.name if episode.show
+  %h2 Series/Episode:
+  %p= h episode.series_and_episode.inspect

@@ -1,0 +1,13 @@
+%html
+  %head
+    %style{ :type => "text/css", :media => "screen" }
+      li {font-size: 3em;}
+      a {text-decoration: none;}
+    = javascript_include_tag :all
+    %title Mediaoca
+  %body
+    - if currently_playing?
+      %h1= currently_playing_name
+    %ul
+      %li= link_to_pause
+      %li= link_to_stop

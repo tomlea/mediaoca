@@ -1,0 +1,8 @@
+.box
+  %h1
+    New show
+  - form_for(@show) do |f|
+    = f.error_messages
+    = f.text_field :name
+    %p= f.submit "Create"
+  = link_to 'Back', shows_path

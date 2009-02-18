@@ -1,0 +1,11 @@
+= render :partial => 'currently_downloading'
+.box
+  %h2
+    Enqueue NZB
+  - form_for(@enqueue, :url => {:action => :enqueue}) do |f|
+  %label
+    NewzbinId:
+    = f.text_field :newzbin_id
+  = f.submit "Enqueue"
+  - end
+= periodically_call_remote(:url => {}, :frequency => 5)

@@ -1,0 +1,9 @@
+.box
+  %h1 Editing show
+  - form_for(@show) do |f|
+    = f.error_messages
+    = f.text_field :name
+    %p= f.submit "Update"
+  = link_to 'Show', @show
+  |
+  = link_to 'Back', shows_path
