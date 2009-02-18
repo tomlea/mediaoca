@@ -1,10 +1,6 @@
 - content_tag_for(:li, episode, :class => (episode.seen? ?  "seen" :  "notseen")) do
   .filename
-    - if episode.show
-      %span.show_name
-        = h(episode.show.name)
-        - if episode.series_and_episode
-          = "%02ix%02i" % [episode.series, episode.episode]
+    %span.show_name= show_name(episode)
     = h episode.name
   .options
     - if currently_playing?(episode)
