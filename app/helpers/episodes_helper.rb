@@ -1,19 +1,19 @@
 require "digest/md5"
 module EpisodesHelper
   def link_to_play(episode)
-    link_to_remote "play", {:url => {:action => "play", :episode => episode}}, {:class => "play"}
+    link_to_remote "play", {:url => {:action => "play", :episode => episode}}, {:class => "play", :href => url_for(:action => "play", :episode => episode)}
   end
 
   def link_to_seen(episode)
-    link_to_remote "toggle seen", {:url => {:action => "seen", :episode => episode}}, {:class => "seen"}
+    link_to_remote "toggle seen", {:url => {:action => "seen", :episode => episode}}, {:class => "seen", :href => url_for(:action => "seen", :episode => episode)}
   end
 
   def link_to_stop
-    link_to_remote "stop", :url => {:controller => :episodes, :action => "stop"}, :html => {:class => "stop"}
+    link_to_remote "stop", :url => {:controller => :episodes, :action => "stop"}, :html => {:class => "stop", :href => url_for(:controller => :episodes, :action => "stop")}
   end
 
   def link_to_pause
-    link_to_remote "play/pause", :url => {:controller => :episodes, :action => "pause"}
+    link_to_remote "play/pause", :url => {:controller => :episodes, :action => "pause"}, :html => {:class => "pause", :href => url_for(:controller => :episodes, :action => "pause")}
   end
 
   def currently_playing?(episode = :anything)
