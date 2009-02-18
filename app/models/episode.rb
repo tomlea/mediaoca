@@ -52,10 +52,6 @@ class Episode < ActiveRecord::Base
     end
   end
 
-  def to_param
-    hash_code
-  end
-
   def name
     returning File.basename(filename) do |name|
       name[/\.[^.]+$/] = ""

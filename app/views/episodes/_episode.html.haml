@@ -9,4 +9,4 @@
     - else
       = link_to_play(episode)
     = link_to_seen(episode)
-    = link_to_remote "more detail", :url => {:controller => :episodes, :action => "detail", :episode => episode}, :html => {:class => "detail"}
+    = link_to_remote "more detail", :url => {:controller => :episodes, :action => "detail", :id => episode}, :html => {:class => "detail"}
