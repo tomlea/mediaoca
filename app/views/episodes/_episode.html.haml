@@ -1,4 +1,4 @@
-- content_tag_for(:li, episode, :class => (episode.seen? ?  "seen" :  "notseen")) do
+%li.episode{:id => dom_id(episode), :class => (episode.seen? && "seen")}
   .filename
     %span.show_name= show_name(episode)
     = h episode.name

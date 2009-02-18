@@ -1,0 +1,234 @@
+body
+  :background #222
+  :font-family "Arial", sans-serif
+  :color #444
+  :padding 0
+  :margin 0
+
+
+div
+  &.box
+    :border 5px solid #fff
+    :background #ddd
+    :padding 10px
+    :margin 2em auto
+    :-moz-border-radius 10px
+    :-webkit-border-radius 10px
+    :width 700px
+    :position relative
+
+  &.notice
+    :border-color #c63
+    :background #fea
+
+  &#top_bar
+    :position relative
+    :height 50px
+    :background #000
+    :margin 0
+
+  &#currently_playing
+    :bottom 10px
+    :left 200px
+    :padding 15px 300px 15px 200px
+    :color #222
+
+    &.playing
+      :color #fff
+
+  &#menu
+    :position absolute
+    :top 15px
+    :right 5px
+    :padding 0
+
+    a
+      :text-decoration none
+      :padding 0 0 0 0.5em
+      :color #aaf
+
+  &.options
+    :position absolute
+    :right 5px
+    :top 5px
+
+  &#detail_lightbox_backdrop
+    :position fixed
+    :top 0
+    :bottom 0
+    :left 0
+    :right 0
+    :background transparent
+
+  &#detail_lightbox
+    :position fixed
+    :top 15%
+    :left 50%
+    :margin-left -320px
+    :width 600px
+    :border 5px solid #a60
+    :padding 1em
+    :background #fea
+    :-moz-border-radius 10px
+    :-webkit-border-radius 10px
+
+    h2
+      :font-size 1.1em
+      :line-height 1em
+
+    p
+      :padding 0
+      :margin 5px 0 10px 5em
+
+  &#system_commands ul
+    :list-style disc inside
+    :margin 10px
+
+
+table
+  :padding 2px 30px 2px 0
+  :text-align left
+  :border-collapse collapse
+  :border 1px solid #eee
+  :border-width 1px 0
+  :margin 50px 0
+  :width 100%
+
+  td, th
+    :padding 2px 30px 2px 0
+    :text-align left
+    :border-collapse collapse
+    :border 1px solid #eee
+    :border-width 1px 0
+
+
+strong
+  :color #222
+  :font-weight normal
+  :font-size 1.1em
+
+
+p.last-watched
+  :font-size 0.7em
+  :color #aaa
+
+
+h1
+  :margin 0
+  :color #000
+
+  &#title
+    :color #555
+    :position absolute
+    :padding 0
+    :margin 0
+    :line-height 1em
+    :left 5px
+    :bottom 10px
+
+
+h2, h3
+  :margin 0
+  :color #000
+
+
+ul
+  :list-style none
+  :margin 0
+  :padding 0
+
+  &#hellanzb_queue li
+    :margin 5px 0
+    :position relative
+    :padding-left 20px
+
+    div.options
+      :left 0
+      :top 2px
+
+li.episode
+  :-moz-border-radius 5px
+  :-webkit-border-radius 5px
+  :border 1px solid #aaa
+  :margin 5px 0
+  :padding 5px 30px 5px 10px
+  :position relative
+  :color #000
+  :background #fff
+
+  &.seen
+    :color #aaa
+    :font-size 0.7em
+    :background transparent
+
+  span.show_name
+    :padding 0 10px 0 0
+    :font-weight bold
+
+
+a
+  &.play
+    :display block
+    :width 16px
+    :height 0
+    :padding-top 16px
+    :overflow hidden
+    :float left
+    :background url("/images/control_play.png")
+
+    &:hover
+      :background url("/images/control_play_blue.png")
+
+  &.stop
+    :display block
+    :width 16px
+    :height 0
+    :padding-top 16px
+    :overflow hidden
+    :float left
+    :background url("/images/control_stop.png")
+
+    &:hover
+      :background url("/images/control_stop_blue.png")
+
+  &.pause
+    :display block
+    :width 16px
+    :height 0
+    :padding-top 16px
+    :overflow hidden
+    :float left
+    :background url("/images/control_pause.png")
+
+    &:hover
+      :background url("/images/control_pause_blue.png")
+
+  &.seen
+    :display block
+    :width 16px
+    :height 0
+    :padding-top 16px
+    :overflow hidden
+    :float left
+    :background url("/images/control_eject.png")
+
+    &:hover
+      :background url("/images/control_eject_blue.png")
+
+  &.detail
+    :display block
+    :width 16px
+    :height 0
+    :padding-top 16px
+    :overflow hidden
+    :float left
+    :background url("/images/magnifier.png")
+
+  &.force
+    :display block
+    :width 16px
+    :height 0
+    :padding-top 16px
+    :overflow hidden
+    :float left
+    :background url("/images/lightning.png")
