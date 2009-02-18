@@ -5,3 +5,4 @@ db/schema.rb
 *.pid
 config/media_paths.yml
 config/authentication.yml
+public/stylesheets/master.css
