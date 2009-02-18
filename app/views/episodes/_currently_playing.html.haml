@@ -1,12 +1,7 @@
-#currently_playing{ :class => (@currently_playing_episode && "playing") }
+#currently_playing{ :class => (currently_playing? && "playing") }
   - if currently_playing?
     %span{ :style => "float: right" }
-      - if paused?
-        = link_to_remote("play", :url => {:controller => :episodes, :action => "pause"}, :html => {:class => "play"})
-      - else
-        = link_to_remote("pause", :url => {:controller => :episodes, :action => "pause"}, :html => {:class => "pause"})
-      = link_to_remote "stop", :url => {:controller => :episodes, :action => "stop"}, :html => {:class => "stop"}
-
-      Playing:
-      = currently_playing_name
-
+      = link_to_pause
+      = link_to_stop
+    Playing:
+    = currently_playing_name
