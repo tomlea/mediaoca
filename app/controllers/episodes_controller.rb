@@ -64,18 +64,6 @@ private
   helper_method :episode
 
   def all_episodes
-    @episodes ||= Episode.all(:include => :show).sort_by{|episode|
-      [
-        episode.seen ? 1 : 0,
-        episode.show && episode.show.name || "",
-        episode.series || 0,
-        episode.episode  || 0,
-        episode.name.downcase
-      ]
-    }
-  end
-
-  def media_paths
-    Episode.media_paths
+    @episodes ||= Episode.all(:include => :show).sort
   end
 end

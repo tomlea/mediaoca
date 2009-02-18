@@ -1,4 +1,6 @@
 class Episode < ActiveRecord::Base
+  include Comparable
+
   EPISODE_MATCHERS = [/([0-9]{1,2})x([0-9]{1,2})/i, /s([0-9]{1,2})e([0-9]{1,2})/i]
   belongs_to :show
 
@@ -93,6 +95,11 @@ class Episode < ActiveRecord::Base
 
   def seen!
     self.seen = true
+  end
+
+  def <=>(other)
+    sorter = proc{|e| [e.seen? && 1, e.show && e.show.name, e.series, e.episode, e.name.downcase, e.id].map{|e| e || 0 }}
+    sorter[self] <=> sorter[other]
   end
 
   def seen=(bool)
