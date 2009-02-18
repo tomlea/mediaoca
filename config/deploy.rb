@@ -28,13 +28,12 @@ namespace :deploy do
   end
 
   task :install_gems do
-    run "cd #{release_path} && sudo rake gems:install"
+    run "cd #{current_path} && sudo rake gems:install"
   end
 
 end
 
 after "deploy:update_code" do
   deploy.link_site_config
-  deploy.install_gems
 end
 
