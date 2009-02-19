@@ -31,9 +31,16 @@ namespace :deploy do
     run "cd #{current_path} && sudo rake gems:install"
   end
 
+  desc "write the crontab file"
+  task :write_crontab, :roles => :app do
+    run "cd #{release_path} && whenever --write-crontab"
+  end
 end
 
 after "deploy:update_code" do
   deploy.link_site_config
 end
 
+after "deploy:symlink" do
+  deploy.write_crontab
+end
