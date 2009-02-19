@@ -11,6 +11,8 @@ role :app, "mediaoca"
 role :web, "mediaoca"
 role :db,  "mediaoca", :primary => true
 
+set :use_sudo, false
+
 namespace :deploy do
   desc "Restarting mod_rails with restart.txt"
   task :restart, :roles => :app, :except => { :no_release => true } do
