@@ -5,7 +5,7 @@ class HellanzbController < ApplicationController
     load_status
 
     @enqueue = Enqueue.new()
-    
+
     respond_to do |want|
       want.html
       want.js
@@ -20,22 +20,22 @@ class HellanzbController < ApplicationController
     end
     redirect_to :action => :index
   end
-  
+
   def hellanzb
     @hellanzb ||= Hellanzb.new
   rescue Errno::ECONNREFUSED
     render :action => "server_down"
   end
-  
+
   def start_server
     if Hellanzb.start_server
       flash[:notice] = "Kindly asked the server to start."
     else
-      flash[:notice] = "Server does not seem to have come up."      
+      flash[:notice] = "Server does not seem to have come up."
     end
     redirect_to :action => :index
   end
-  
+
   def force_download
     hellanzb.force(params[:nzbid])
     respond_to do |want|
@@ -45,7 +45,7 @@ class HellanzbController < ApplicationController
       }
     end
   end
-  
+
   def pause_server
     load_status
     if @current_download_paused
@@ -53,7 +53,7 @@ class HellanzbController < ApplicationController
     else
       hellanzb.pause
     end
-    
+
     respond_to do |want|
       want.html { redirect_to :action => :index }
       want.js {
@@ -61,7 +61,7 @@ class HellanzbController < ApplicationController
       }
     end
   end
-  
+
 private
   def load_status
     @status = hellanzb.status
