@@ -24,10 +24,6 @@ module EpisodesHelper
     h File.basename(@currently_playing_episode.filename)
   end
 
-  def paused?
-    @paused
-  end
-
   def show_name(episode)
     show_name = episode.show && h(episode.show.name)
     (episode.series_and_episode ? "%s %02ix%02i" : "%s") % [show_name, episode.series, episode.episode]

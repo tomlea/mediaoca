@@ -29,10 +29,8 @@ private
   def fetch_currently_playing
     if currently_playing_file = media_controller.currently_playing
       @currently_playing_episode = Episode.for(currently_playing_file)
-      @paused = media_controller.paused
     else
       @currently_playing_episode = nil
-      @paused = false
     end
   rescue DRb::DRbConnError
     @notice =        "Could not connect to the media_controller daemon. "+
