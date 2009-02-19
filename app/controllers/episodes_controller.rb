@@ -2,10 +2,13 @@ class EpisodesController < ApplicationController
   include EpisodesHelper
 
   def index
-    @episodes = all_episodes
-    response.last_modified = @episodes.map{|e| e.updated_at}.max
-    response.etag = @episodes
-    head :not_modified if request.fresh?(response)
+    response.last_modified = all_episodes.map{|e| e.updated_at}.max
+    response.etag = all_episodes
+    if request.fresh?(response)
+      head :not_modified
+    else
+      @episodes = all_episodes.sort
+    end
   end
 
   def min
@@ -67,6 +70,6 @@ private
   helper_method :episode
 
   def all_episodes
-    @episodes ||= Episode.all(:include => :show).sort
+    @all_episodes ||= Episode.all(:include => :show)
   end
 end
