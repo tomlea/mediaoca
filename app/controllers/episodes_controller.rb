@@ -3,6 +3,9 @@ class EpisodesController < ApplicationController
 
   def index
     @episodes = all_episodes
+    response.last_modified = @episodes.map{|e| e.updated_at}.max
+    response.etag = @episodes
+    head :not_modified if request.fresh?(response)
   end
 
   def min
