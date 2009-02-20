@@ -28,7 +28,7 @@ class Episode < ActiveRecord::Base
     end
 
     def clenseables
-      YAML.load(File.open(File.join(Rails.root, "config", "clenseables.yml")))
+      @clenseables ||= Regexp.new(YAML.load(File.open(File.join(Rails.root, "config", "clenseables.yml"))).join("|"))
     end
 
     def media_paths
@@ -56,16 +56,14 @@ class Episode < ActiveRecord::Base
 
   def name
     returning File.basename(filename) do |name|
-      name[/\.[^.]+$/] = ""
+      name[/\.[^.]+$/] = " "
       name.gsub!("."," ")
-      self.class.clenseables.each do |clenseable|
-        name.gsub!(clenseable, "")
-        name.sub!(/#{show.name}/, "") if show
-        EPISODE_MATCHERS.each do |em|
-          name.sub!(em, "") if series_and_episode
-        end
-        name.gsub!(" +"," ")
+      name.gsub!(self.class.clenseables, " ")
+      name.sub!(/#{show.name}/, " ") if show
+      EPISODE_MATCHERS.each do |em|
+        name.sub!(em, "") if series_and_episode
       end
+      name.gsub!("[ ]+"," ")
     end
   end
 
@@ -78,11 +76,12 @@ class Episode < ActiveRecord::Base
   end
 
   def series_and_episode
-    if EPISODE_MATCHERS.any?{|re| filename =~ re }
-      [$1.to_i, $2.to_i]
-    else
-      nil
-    end
+    @series_and_episode ||= [
+      if EPISODE_MATCHERS.any?{|re| filename =~ re }
+        [$1.to_i, $2.to_i]
+      else
+        nil
+      end ].first
   end
 
   def seen
@@ -98,7 +97,7 @@ class Episode < ActiveRecord::Base
   end
 
   def <=>(other)
-    sorter = proc{|e| [e.seen? && 1, e.show && e.show.name, e.series, e.episode, e.name.downcase, e.id].map{|e| e || 0 }}
+    sorter = proc{|e| [e.seen? && 1, e.show && e.show.name, e.series, e.episode, e.name ].map{|e| e || 0 }}
     sorter[self] <=> sorter[other]
   end
 
