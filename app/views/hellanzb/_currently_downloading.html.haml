@@ -4,11 +4,7 @@
     Currently Downloading
   - if @current_download_name
     %h3= h @current_download_name
-    %p
-      %strong= h @percent_complete
-      of
-      %strong= h @current_download_size
-      mb
+    %p= hellanzb_progress(@percent_complete, @current_download_size)
     %p
       Rate:
       %strong= h @rate
