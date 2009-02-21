@@ -1,0 +1,6 @@
+%li
+  %strong= h queue_item["nzbName"]
+  (
+  %strong= h queue_item["total_mb"]
+  mb)
+  .options= link_to_remote("force download", :url => {:action => :force_download, :nzbid => queue_item["id"]}, :html => {:class => "force"})

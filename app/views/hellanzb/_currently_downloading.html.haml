@@ -19,11 +19,4 @@
     %strong= h @current_download_paused
   - if queue = @status["queued"]
     %h2 Queued
-    %ul#hellanzb_queue
-      - queue.each do |item|
-        %li
-          %strong= h item["nzbName"]
-          (
-          %strong= h item["total_mb"]
-          mb)
-          .options= link_to_remote("force download", :url => {:action => :force_download, :nzbid => item["id"]}, :html => {:class => "force"})
+    %ul#hellanzb_queue= render :partial => "queue_item", :collection => queue
