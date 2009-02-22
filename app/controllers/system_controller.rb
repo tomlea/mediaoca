@@ -11,7 +11,13 @@ class SystemController < ApplicationController
     flash[:notice] = "Sent system to sleep in 2."
     redirect_to :action => "index"
   end
-  
+
+  def shutdown_system
+    system("sudo /sbin/shutdown -h now")
+    flash[:notice] = "System should be going down now."
+    redirect_to :action => "index"
+  end
+
   def restart_media_controller
     Dir.chdir(ENV["HOME"]) do
       system("/usr/bin/media_controller", "restart")
