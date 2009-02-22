@@ -26,7 +26,7 @@ namespace :deploy do
 
   desc "Link config files from server side shared path."
   task :link_site_config do
-    run "for F in #{shared_path}/config/*; do ln -s $F #{release_path}/config/; done"
+    run "for F in #{shared_path}/config/*; do ln -sf $F #{release_path}/config/; done"
   end
 
   task :install_gems do
