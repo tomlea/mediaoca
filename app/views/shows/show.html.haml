@@ -1,7 +1,7 @@
 .box
   %h1= h @show.name
   
-  = render :partial => "episode", :collection => @episodes
+  %ul= render :partial => "episode", :collection => @episodes
   
   .options
     = link_to 'Edit', edit_show_path(@show)

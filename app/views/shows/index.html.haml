@@ -7,6 +7,6 @@
         = link_to 'Show', show
         = link_to 'Edit', edit_show_path(show)
       - if show.episodes.latest
-        =render :partial => "episode", :object => show.episodes.latest
+        %ul= render :partial => "episode", :object => show.episodes.latest
   .options
     = link_to 'New show', new_show_path

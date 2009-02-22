@@ -1,4 +1,4 @@
-.episode{:id => dom_id(episode), :class => (episode.seen? && "seen")}
+%li.episode{:id => dom_id(episode), :class => (episode.seen? && "seen")}
   .filename
     %span.show_name= show_name(episode)
     = h episode.name
