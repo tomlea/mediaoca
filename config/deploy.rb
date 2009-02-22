@@ -4,8 +4,11 @@ set :application, "mediaoca"
 set :deploy_to, "/apps/#{application}"
 
 set :scm, :git
-set :deploy_via, :remote_cache
-set :repository,  "git@mediaoca:mediaoca.git"
+set :deploy_via, :copy
+set :copy_cache, true
+set :copy_exclude, [".git/*", ".svn/*"]
+set :copy_strategy, :export
+set :repository, Dir.pwd
 
 role :app, "mediaoca"
 role :web, "mediaoca"
