@@ -84,6 +84,10 @@ class Episode < ActiveRecord::Base
       end ].first
   end
 
+  def unknown_episode?
+    series_and_episode.nil? || !series_and_episode.all?
+  end
+
   def seen
     last_watched?
   end

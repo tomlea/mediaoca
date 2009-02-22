@@ -1,6 +1,6 @@
 class ShowsController < ApplicationController
   def index
-    @shows = Show.find(:all)
+    @shows = Show.find(:all).sort_by{|s| [s.episodes.latest && 0 || 1, s.name.downcase]}
   end
 
   def show
