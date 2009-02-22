@@ -5,6 +5,10 @@ class Show < ActiveRecord::Base
     end
   end
 
+  after_create do
+    Episode.detect_missing_shows!
+  end
+
   def self.guess_show(episode)
     normalize = lambda{|name| name.downcase.gsub(/[^a-z0-9]/, "")}
     all.find{|show|
