@@ -1,0 +1,7 @@
+%ul#episodes{:selected => "true"}
+  - @episodes.each do |episode|
+    %li{:class => (episode.seen? && "seen")}
+      -if episode.seen?
+        =link_to_play(episode, show_name(episode) + " (seen)")
+      -else
+        =link_to_play(episode, show_name(episode))

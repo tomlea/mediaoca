@@ -1,4 +1,5 @@
 class ShowsController < ApplicationController
+  acts_as_iphone_controller
   def index
     @shows = Show.find(:all).sort_by{|s| [s.episodes.latest.any? && 0 || 1, s.name.downcase]}
   end

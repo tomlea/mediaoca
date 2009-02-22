@@ -1,0 +1,9 @@
+%html
+  %head
+    = include_iui_files
+    = viewport_tag(:device_width => true)
+  %body
+    =iui_toolbar("Mediaoca")
+    %ul#shows{:selected => "true"}
+      -@shows.each do |show|
+        %li= link_to(show.name, show)

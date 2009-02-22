@@ -1,7 +1,7 @@
 require "digest/md5"
 module EpisodesHelper
-  def link_to_play(episode)
-    link_to_remote "play", {:url => {:controller => :episodes, :action => "play", :id => episode}}, {:class => "play", :href => url_for(:controller => :episodes, :action => "play", :id => episode)}
+  def link_to_play(episode, text = "play")
+    link_to_remote text, {:url => {:controller => :episodes, :action => "play", :id => episode}}, {:class => "play", :href => url_for(:controller => :episodes, :action => "play", :id => episode)}
   end
 
   def link_to_seen(episode)
