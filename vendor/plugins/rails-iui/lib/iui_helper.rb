@@ -7,7 +7,7 @@ module IuiHelper
   end
   
   def include_iui_files
-    stylesheet_link_tag('iui') + javascript_include_tag('iui') +
+    stylesheet_link_tag('/iui/iui.css') + javascript_include_tag('/iui/iui.js') +
     javascript_tag("function $(id) { return document.getElementById(id); }")
   end
   

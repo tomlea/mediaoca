@@ -1,9 +1,15 @@
 %html
   %head
     = include_iui_files
-    = viewport_tag(:device_width => true)
+    <meta id="viewport" name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
   %body
-    =iui_toolbar("Mediaoca")
+    .toolbar
+      %h1 Mediaoca
+      =button_link_to("", "#", :id => "backButton")
+      =button_link_to("Controls", "#controls")
     %ul#shows{:selected => "true"}
       -@shows.each do |show|
         %li= link_to(show.name, show)
+    %ul#controls
+      %li=link_to("Pause", pause_url)
+      %li=link_to("Stop", stop_url)

@@ -9,11 +9,19 @@ module EpisodesHelper
   end
 
   def link_to_stop
-    link_to_remote "stop", :url => {:controller => :episodes, :controller => :episodes, :action => "stop"}, :html => {:class => "stop", :href => url_for(:controller => :episodes, :controller => :episodes, :action => "stop")}
+    link_to_remote "stop", :url => stop_url, :html => {:class => "stop", :href => url_for(:controller => :episodes, :controller => :episodes, :action => "stop")}
   end
 
   def link_to_pause
-    link_to_remote "play/pause", :url => {:controller => :episodes, :action => "pause"}, :html => {:class => "pause", :href => url_for(:controller => :episodes, :action => "pause")}
+    link_to_remote "play/pause", :url => pause_url, :html => {:class => "pause", :href => url_for(:controller => :episodes, :action => "pause")}
+  end
+
+  def stop_url
+    {:controller => :episodes, :action => "stop"}
+  end
+
+  def pause_url
+    {:controller => :episodes, :action => "pause"}
   end
 
   def currently_playing?(episode = :anything)
