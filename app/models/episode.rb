@@ -101,7 +101,7 @@ class Episode < ActiveRecord::Base
   end
 
   def <=>(other)
-    sorter = proc{|e| [e.seen? && 1, e.show && e.show.name, e.series, e.episode, e.name ].map{|e| e || 0 }}
+    sorter = proc{|e| [e.seen? && 1, e.show && e.show.name || "", e.series, e.episode, e.name ].map{|e| e || 0 }}
     sorter[self] <=> sorter[other]
   end
 
