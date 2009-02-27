@@ -1,8 +1,9 @@
 .box
   %h1 Listing shows
   - for show in @shows
-    .show
-      %h2= h show.name
+    .show[show]
+      %h2&= show.name
+      %span.stats&= show.episodes.reject(&:seen?).size.to_s + " of " + show.episodes.size.to_s
       .options
         = link_to 'Show', show
         = link_to 'Edit', edit_show_path(show)
