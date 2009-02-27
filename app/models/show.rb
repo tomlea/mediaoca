@@ -1,7 +1,7 @@
 class Show < ActiveRecord::Base
   has_many :episodes do
     def latest
-      @latest ||= reject(&:seen?).reject(&:unknown_episode?).sort_by(&:series_and_episode)
+      @latest ||= reject(&:seen?).sort_by{|e| e.series_and_episode ? e.series_and_episode : [0,0]}
     end
   end
 
