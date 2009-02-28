@@ -3,7 +3,6 @@ class HellanzbController < ApplicationController
 
   def index
     load_status
-
     @enqueue = Enqueue.new()
 
     respond_to do |want|
@@ -13,18 +12,16 @@ class HellanzbController < ApplicationController
   end
 
   def enqueue
-    @enqueue = Enqueue.new(params[:enqueue])
-    if @enqueue.newzbin_id
-      hellanzb.enqueuenewzbin(@enqueue.newzbin_id)
-      flash[:notice] = "Enqueued NZB id #{@enqueue.newzbin_id}"
+    if request.method == :put
+      @enqueue = Enqueue.new(params[:enqueue])
+      if @enqueue.newzbin_id
+        hellanzb.enqueuenewzbin(@enqueue.newzbin_id)
+        flash[:notice] = "Enqueued NZB id #{@enqueue.newzbin_id}"
+      end
+      redirect_to :action => :index
+    else
+      @enqueue = Enqueue.new(params[:enqueue])
     end
-    redirect_to :action => :index
-  end
-
-  def hellanzb
-    @hellanzb ||= Hellanzb.new
-  rescue Errno::ECONNREFUSED
-    render :action => "server_down"
   end
 
   def start_server
@@ -63,6 +60,12 @@ class HellanzbController < ApplicationController
   end
 
 private
+  def hellanzb
+    @hellanzb ||= Hellanzb.new
+  rescue Errno::ECONNREFUSED
+    render :action => "server_down"
+  end
+
   def load_status
     @status = hellanzb.status
     if current_download = @status["currently_downloading"].first

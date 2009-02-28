@@ -1,0 +1,7 @@
+.box
+  %h1 Enqueue Episode
+  - form_for(@enqueue, :url => {:action => :enqueue}) do |f|
+    %label
+      NewzbinId:
+      = f.text_field :newzbin_id
+    = f.submit "Enqueue"
