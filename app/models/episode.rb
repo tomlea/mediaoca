@@ -38,7 +38,9 @@ class Episode < ActiveRecord::Base
     def scan_for_episodes!
       media_paths.map{|path|
         Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv,ts,mov,mp4,m4v}")
-      }.flatten.map{|filename|
+      }.flatten.reject{|filename|
+        File.basename(filename) =~ /[ -.({]sample([ -.)}]|$)/i
+      }.map{|filename|
         Episode.for(filename)
       }
     end
