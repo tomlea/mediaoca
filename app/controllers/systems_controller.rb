@@ -20,6 +20,12 @@ class SystemsController < ApplicationController
     redirect_to :action => "show"
   end
 
+  def scan_for_new_media
+    Episode.scan_for_episodes!
+    flash[:notice] = "Scan complete."
+    redirect_to :action => "show"
+  end
+
   def show
     @disk_usage = disk_usage
   end

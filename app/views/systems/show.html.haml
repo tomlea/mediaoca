@@ -1,8 +1,9 @@
 #system_commands.box
   %h1 System Commands
   %ul
-    %li= link_to "Restart Media Controller", restart_media_controller_system_path, :method => :put
+    %li= link_to "Restart media controller", restart_media_controller_system_path, :method => :put
     %li= link_to "Shutdown", shutdown_system_path, :confirm => "Are you sure?", :method => :delete
+    %li= link_to "Scan for new media", scan_for_new_media_system_path, :method => :post
 #disk_usage.box
   %h1 Disk Usage
   %table
