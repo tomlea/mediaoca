@@ -21,10 +21,17 @@ class SystemsController < ApplicationController
   end
 
   def show
-    @disk_usage = Episode.media_paths.map{|mp|
+    @disk_usage = disk_usage
+  end
+
+private
+  def disk_usage
+    Episode.media_paths.map{|mp|
       `/bin/df -m #{mp}`.chomp.split("\n").last.split(/ +/)
     }.uniq{|parts| parts.first }.map{|(path, total, used, available, usage, partition)|
       OpenStruct.new(:path => partition, :total => total.to_i, :used => used.to_i, :available => available.to_i)
     }
+  rescue
+    []
   end
 end
