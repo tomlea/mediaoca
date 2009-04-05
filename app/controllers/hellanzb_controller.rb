@@ -24,15 +24,6 @@ class HellanzbController < ApplicationController
     end
   end
 
-  def start_server
-    if Hellanzb.start_server
-      flash[:notice] = "Kindly asked the server to start."
-    else
-      flash[:notice] = "Server does not seem to have come up."
-    end
-    redirect_to :action => :index
-  end
-
   def force_download
     hellanzb.force(params[:nzbid])
     respond_to do |want|
@@ -61,8 +52,8 @@ class HellanzbController < ApplicationController
 
 private
   def hellanzb
-    @hellanzb ||= Hellanzb.new
-  rescue Errno::ECONNREFUSED
+    @hellanzb ||= Hellanzb.client
+  rescue Hellanzb::ServerDown
     render :action => "server_down"
   end
 
