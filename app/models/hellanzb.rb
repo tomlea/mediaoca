@@ -1,5 +1,7 @@
 require 'timeout'
 class Hellanzb
+  class ServerDown < Exception; end
+
   HELLA_URL = "http://hellanzb:changeme@localhost:8760"
   HELLA_BIN = `which hellanzb`.chomp
 
@@ -30,8 +32,19 @@ class Hellanzb
     end
   end
 
+  def self.client
+    new
+  rescue Errno::ECONNREFUSED
+    begin
+      start_server
+      new
+    rescue
+      raise Hellanzb::ServerDown, $!
+    end
+  end
+
   def self.start_server
-    Timeout.timeout(1) do
+    Timeout.timeout(5) do
       system(HELLA_BIN+" -D")
       $?.success?
     end
