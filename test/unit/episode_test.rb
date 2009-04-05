@@ -17,6 +17,13 @@ class EpisodeTest < ActiveSupport::TestCase
     Episode.scan_for_episodes!
   end
 
+  test "should not find episodes that start with sample" do
+    Episode.stubs(:media_paths).returns(["some_foo"])
+    Dir.stubs(:glob).returns(["this is a move called the sampler", "sample-move.png", "this.is.a.sample-divx.avi"])
+    Episode.expects(:for).with("this is a move called the sampler").once
+    Episode.scan_for_episodes!
+  end
+
   test "should match an AVI" do
     Episode.stubs(:media_paths).returns(["some_foo"])
     Dir.stubs(:glob).returns(["this.is.a.movie-divx.avi"])

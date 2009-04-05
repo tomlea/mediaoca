@@ -39,7 +39,7 @@ class Episode < ActiveRecord::Base
       media_paths.map{|path|
         Dir.glob("#{path}/**/*.{avi,wmv,divx,mkv,ts,mov,mp4,m4v}")
       }.flatten.reject{|filename|
-        File.basename(filename) =~ /[ -.({]sample([ -.)}]|$)/i
+        File.basename(filename) =~ /([ -.({]|^)sample([ -.)}]|$)/i
       }.map{|filename|
         Episode.for(filename)
       }
