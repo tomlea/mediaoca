@@ -9,7 +9,12 @@
   %p= episode.hash_code
   %h2 Id:
   %p= episode.id
-  %h2 Show:
-  %p= h episode.show.name if episode.show
   %h2 Series/Episode:
   %p= h episode.series_and_episode.inspect
+  %h2 Show:
+  %p= h episode.show.name if episode.show
+
+  %h2 Set Show:
+  = form_for(episode) do |f|
+    =f.select(:show_id, Show.all.map{|s| [s.name, s.id] })
+    =f.submit

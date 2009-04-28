@@ -11,6 +11,12 @@ class EpisodesController < ApplicationController
     end
   end
 
+  def update
+    @episode = Episode.find(params[:id])
+    @episode.update_attributes(params[:episode])
+    redirect_to @episode.show
+  end
+
   def min
     fetch_currently_playing
     render :layout => false
