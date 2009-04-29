@@ -5,3 +5,5 @@
       NewzbinId:
       = f.text_field :newzbin_id
     = f.submit "Enqueue"
+  - javascript_tag do
+    $('enqueue_newzbin_id').focus();
