@@ -36,6 +36,19 @@ class HomeControllerTest < ActionController::TestCase
       should_render_with_layout "master"
     end
 
+    static_context "and we have seen all the simpsons episodes" do
+      static_setup do
+        @the_simpsons.episodes.each(&:seen!)
+        get :index
+      end
+
+      should_respond_with :success
+
+      should "not list The Simpsons in the most recently updated shows" do
+        assert !assigns(:fresh_episodes).include?(@the_simpsons)
+      end
+    end
+
     static_context "and a new episode of the west wing has been found" do
       static_setup do
         Factory(:episode, :show => @west_wing)
