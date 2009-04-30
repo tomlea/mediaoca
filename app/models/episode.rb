@@ -4,6 +4,20 @@ class Episode < ActiveRecord::Base
   EPISODE_MATCHERS = [/([0-9]{1,2})x([0-9]{1,2})/i, /s([0-9]{1,2})e([0-9]{1,2})/i]
   belongs_to :show
 
+  module CollectionMethods
+    def latest
+      @latest ||= reject(&:seen?).sort_by{|e| e.series_and_episode ? e.series_and_episode : [0,0]}
+    end
+
+    def last_changed
+      map(&:created_at).max
+    end
+
+    def most_recently_seen
+      map(&:seen).max
+    end
+  end
+
   class << self
     def file_digest(file)
       Digest::MD5.hexdigest(file)

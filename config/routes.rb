@@ -33,7 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "shows"
+  map.root :controller => "home"
   map.resources :shows
   map.resources :episodes
   map.resource :system, :collection => {:shutdown => :delete, :restart_media_controller => :put, :scan_for_new_media => :post}

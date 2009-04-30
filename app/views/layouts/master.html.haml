@@ -8,7 +8,8 @@
       %h1#title
         Mediaoca
       #menu
-        = link_to "episodes", {:controller => :episodes}, :class => "first"
+        = link_to "home", {:controller => :home}, :class => "first"
+        = link_to "episodes", {:controller => :episodes}
         = link_to "shows", {:controller => :shows}
         = link_to "nzb", {:controller => :hellanzb}
         = link_to "system", {:controller => :system}

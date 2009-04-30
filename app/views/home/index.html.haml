@@ -1,0 +1,6 @@
+.box
+  %h2 Latest Updated Shows
+  %ul
+    -@fresh_episodes.each do |show|
+      %li=link_to(h(show.name), show)
+      
