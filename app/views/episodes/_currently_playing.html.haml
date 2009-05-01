@@ -1,7 +1,7 @@
 #currently_playing{ :class => (currently_playing? && "playing") }
   - if currently_playing?
     %span{ :style => "float: right" }
-      = link_to_pause
+      = link_to_pause(:accesskey => "p")
       = link_to_stop
     Playing:
     = currently_playing_name

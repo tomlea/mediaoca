@@ -12,8 +12,8 @@ module EpisodesHelper
     link_to_remote "stop", :url => stop_url, :html => {:class => "stop", :href => url_for(:controller => :episodes, :controller => :episodes, :action => "stop")}
   end
 
-  def link_to_pause
-    link_to_remote "play/pause", :url => pause_url, :html => {:class => "pause", :href => url_for(:controller => :episodes, :action => "pause")}
+  def link_to_pause(options = {})
+    link_to_remote "play/pause", {:url => pause_url, :html => {:class => "pause", :href => url_for(:controller => :episodes, :action => "pause")}.merge(options)}
   end
 
   def stop_url
