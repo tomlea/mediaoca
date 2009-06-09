@@ -1,5 +1,6 @@
 class Episode < ActiveRecord::Base
   include Comparable
+  named_scope :unwatched, {:conditions => {:last_watched => nil}}
 
   EPISODE_MATCHERS = [/([0-9]{1,2})x([0-9]{1,2})/i, /s([0-9]{1,2})e([0-9]{1,2})/i]
   belongs_to :show

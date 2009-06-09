@@ -1,4 +1,9 @@
 .box
+  %h2 Unwatched
+  #unwatched_cloud
+    - @shows_with_new_episodes.each do |show|
+      %span{:style=>"font-size: #{1+[show.episodes.unwatched.size, 10].min / 10.0 }em"}=link_to("#{h(show.name)} (#{show.episodes.unwatched.size})", show)
+.box
   %h2 Latest Updated Shows
   %ul
     -@fresh_episodes.each do |show|
