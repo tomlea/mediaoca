@@ -3,9 +3,16 @@
   #unwatched_cloud
     - @shows_with_new_episodes.each do |show|
       %span{:style=>"font-size: #{1+[show.episodes.unwatched.size, 10].min / 10.0 }em"}=link_to("#{h(show.name)} (#{show.episodes.unwatched.size})", show)
+
+
+.box
+  %h2 Last Watched
+  %ol
+    -@last_watched.each do |show|
+      %li=link_to(h(show.name), show)
+
 .box
   %h2 Latest Updated Shows
-  %ul
+  %ol
     -@fresh_episodes.each do |show|
       %li=link_to(h(show.name), show)
-      
