@@ -14,7 +14,7 @@ class Show < ActiveRecord::Base
     end
 
     def most_recently_updated
-      Show.all.sort_by{|show| show.episodes.last_changed }.reverse
+      Show.all.select{|show| show.episodes.any? }.sort_by{|show| show.episodes.last_changed }.reverse
     end
   end
 end
