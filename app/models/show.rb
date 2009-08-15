@@ -5,6 +5,10 @@ class Show < ActiveRecord::Base
     Episode.detect_missing_shows!
   end
 
+  def to_param
+    "#{id}-#{name.gsub(/ /, "-").dasherize}"
+  end
+
   class << self
     def guess_show(episode)
       normalize = lambda{|name| name.downcase.gsub(/[^a-z0-9]/, "")}
