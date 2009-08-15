@@ -2,7 +2,9 @@
   %head
     %link{ :href => "/stylesheets/master.css", :title => "Main Style", :rel => "stylesheet", :media => "screen", :type => "text/css", :charset => "utf-8" }
     = javascript_include_tag :defaults
-    %title Mediaoca
+    %title
+      Mediaoca
+      =yield :title
   %body
     #top_bar
       %h1#title
